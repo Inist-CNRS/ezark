@@ -1,5 +1,5 @@
 module.exports = {
-  "browserifyModules" : [ "jquery" ],
+  "browserifyModules" : [ "jquery", "oboe", "paperclip/lib/node.js" ],
   "rootURL" : "index.html",
   "collectionsIndexName" : "index",
   "collectionName" :       "index",
@@ -16,6 +16,7 @@ module.exports = {
   "routes": [
     "echo.js",
     "generator.js",
+    "resolver.js",
     "table.js"
   ]
 };

@@ -12,7 +12,7 @@ var path = require('path')
   , shortid = require('shortid')
  ;
 
-module.exports = function(router) {
+module.exports = function(router, core) {
 
   router
   .route('/-/generator')
