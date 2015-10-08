@@ -22,6 +22,9 @@ module.exports = function(options) {
     if (options.range < 0 || options.range > 99) {
       return submit(new Error('Range is not valid'), null);
     }
+    if (Number.isNaN(options.size) || options.size < 1) {
+      return submit(new Error('Size is not valid'), null);
+    }
     for (var i = 0; i < options.size; i++) {
       var rag = String(options.range);
       var doc = clone(input, false);

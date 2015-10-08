@@ -1,5 +1,5 @@
 module.exports = {
-  "browserifyModules" : [ "jquery", "oboe", "paperclip/lib/node.js" ],
+  "browserifyModules" : [ "heartbeats", "async", "jquery", "oboe", "paperclip/lib/node.js" ],
   "rootURL" : "index.html",
   "collectionsIndexName" : "index",
   "collectionName" :       "index",
