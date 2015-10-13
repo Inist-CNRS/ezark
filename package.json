@@ -31,6 +31,7 @@
     "castor-load-json": "^1.0.0",
     "checkdigit": "^1.1.1",
     "clone": "^1.0.2",
+    "csv-string": "^2.3.0",
     "datamodel": "^1.5.0",
     "debug": "^2.2.0",
     "express-validation": "^0.4.5",

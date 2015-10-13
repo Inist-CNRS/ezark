@@ -9,7 +9,7 @@ var path = require('path')
 module.exports = function(options) {
   options = options || {};
   options.naan = options.naan || undefined;
-  options.range = Number(options.range.replace('range_', '') || 0);
+  options.range = Number(options.range.replace('R', '') || 0);
   options.size = Number(options.size || 1);
   options.pad = "0000000000000";
   return function (input, submit) {
@@ -32,8 +32,9 @@ module.exports = function(options) {
       var id = rag.concat(hash);
       var vid = checkdigit.mod10.apply(id);
       var pid = options.pad.substring(0, options.pad.length - vid.length) + vid
-      doc._name = pid;
+      doc._wid = pid;
       doc.ark = 'ark:/' + options.naan + '/' + pid;
+      doc.bundle = doc.filename.replace(doc.directory, '').replace(doc.extension, '').slice(1, -1);
       var qe = submit(doc);
     }
     submit();

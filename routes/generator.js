@@ -26,7 +26,7 @@ module.exports = function(router, core) {
   .post(function(req, res, next) {
       var loaderOptions = {
         "collectionName" : req.body.range,
-        "connexionURI" : req.config.get('connexionURI'),
+        "connexionURI" : req.config.get('connectionURI'),
         "concurrency" : req.config.get('concurrency'),
         "delay" : req.config.get('delay'),
         "maxFileSize" : req.config.get('maxFileSize'),

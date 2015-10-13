@@ -5,8 +5,10 @@ $(document).ready(function() {
 
     var oboe = require('oboe');
     var async = require('async');
+    var CSV = require('csv-string');
     var heart = require('heartbeats').createHeart(100);
     var pc = require("paperclip/lib/node.js");
+    var qs = require('qs')
 
     var tpl1 = document.getElementById("select-range-template").innerHTML.replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
     var tpl2 = document.getElementById("count-range-template").innerHTML.replace(/\[\[/g, '{{').replace(/\]\]/g, '}}');
@@ -19,7 +21,6 @@ $(document).ready(function() {
     document.getElementById("count-identifier-handle").appendChild(view3.render());
 
     oboe(window.location.protocol + '//' + window.location.host + '/index/*').done(function(items) {
-        console.log('setview', items,  items.length);
         view1.set('items', items);
         view2.set('count', items.length);
 
@@ -31,15 +32,13 @@ $(document).ready(function() {
                 callback(null, Number(items[0].value));
             })
           }, function(err, results) {
-            console.log('setview 3', results);
             view3.set( 'count', results.reduce(function(pv, cv) { return pv + cv; }, 0));
         });
     })
     // heart.createEvent(200, function(heartbeat, last) { });
 
     function resark(ark) {
-      console.log(ark);
-      window.location.href = 'http://' + document.location.host + '/' + ark;
+      window.location.href = document.location.protocol + '//' + document.location.host + '/' + ark;
     }
 
     $('#form-resolve').submit(function() {
@@ -70,7 +69,10 @@ $(document).ready(function() {
             url: "/-/generator",
             data: formData,
             success: function(data) {
-              console.log(data);
+              var query = {
+                where : CSV.stringify(["bundle", "=", data], ' ')
+              };
+              console.log(document.location.protocol + '//' + document.location.host + '/' + formData.range + '/*?' + qs.stringify(query));
               $('#modal-generate').modal('toggle');
             }
         });

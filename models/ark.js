@@ -33,7 +33,7 @@ module.exports = function(model) {
         return fill();
       }
       var q = {
-        _name: this.collectionName
+        _wid: this.collectionName
       };
       this.mongoCollectionsIndexHandle.findOne(q).then(function(doc) {
           if (doc === null && req.routeParams.resourceName !== 'index') {
