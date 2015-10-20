@@ -19,6 +19,22 @@ module.exports = {
     "generator.js",
     "resolver.js",
     "table.js"
-  ]
+  ],
+  "flyingFields": {
+    "$ark": {
+      "label" : "ARK",
+      "scheme" : "http://purl.org/dc/elements/1.1/identifier",
+      "get": "ark"
+    },
+    "$range": {
+      "label" : "Sous autorité",
+      "get": "_wid",
+      "truncate": 2
+    },
+    "$batchID": {
+      "label" : "N° lot",
+      "get": "bundle"
+    }
+  }
 };
 module.exports.package = require('./package.json');

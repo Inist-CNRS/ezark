@@ -4,125 +4,26 @@
 
 <div class="jumbotron">
 	<div class="container">
-		<h1>ARK directory</h1>
+		<h1>ARK registry</h1>
 		<p>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam in finibus ligula, in varius tellus. Quisque eget lectus quis nisi ultricies rhoncus. Nulla fermentum tortor id vestibulum efficitur. Sed eget lacinia lectus, ac euismod tellus. Pellentesque tempor arcu vitae turpis pellentesque malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dapibus ornare fringilla. Donec blandit augue nec leo dictum, a egestas felis ullamcorper. Sed sed tristique tellus.
 		</p>
-		<p><a id="action-generate" class="btn btn-primary btn-lg" href="#" role="button">Generate New ARK &raquo;</a></p>
+		<p><a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#modal-generate">Generate New ARK &raquo;</a></p>
 	</div>
 </div>
 
 <div class="container">
-
-	<div class="row">
-		<div class="col-xs-6 col-md-3">
-
-			<div class="panel status panel-danger">
-				<div class="panel-heading">
-					<h1 class="panel-title text-center">
-						<small>
-						{{ config.NAAN|d('?') }}
-						</small>
-					</h1>
-				</div>
-				<div class="panel-body text-center">
-					<strong>NAAN</strong>
-				</div>
-			</div>
-
-		</div>
-		<div class="col-xs-6 col-md-3">
-
-			<div class="panel status panel-warning">
-				<div class="panel-heading">
-					<h1 class="panel-title text-center" id="count-range-handle">
-						<!-- see #count-range-template -->
-					</h1>
-				</div>
-				<div class="panel-body text-center">
-					<strong>Range</strong>
-				</div>
-			</div>
-
-		</div>
-		<div class="col-xs-6 col-md-3">
-
-			<div class="panel status panel-success">
-				<div class="panel-heading">
-					<h1 class="panel-title text-center" id="count-identifier-handle">
-						<!-- see #count-identifier-template -->
-					</h1>
-				</div>
-				<div class="panel-body text-center">
-					<strong>Identifiers</strong>
-				</div>
-			</div>
-
-
-		</div>
-		<div class="col-xs-6 col-md-3">
-
-			<div class="panel status panel-info">
-				<div class="panel-heading">
-					<h1 class="panel-title text-center">0</h1>
-				</div>
-				<div class="panel-body text-center">
-					<strong>Bundles</strong>
-				</div>
-			</div>
-
-
-		</div>
-	</div>
-	<div class="row">
-			<form id="form-resolve">
-				<div class="col-sm-3">
-				</div>
-				<div class="form-group form-group-lg  col-sm-6">
-					<div class="input-group">
-						<div id="form-resolve-addon-ark" class="input-group-addon" style="font-size:2em; font-weight:bold;">ark:/{{ config.NAAN|d('?') }}/</div>
-						<input type="text" class="form-control" id="form-resolve-input-ark" placeholder="" style="font-size:2em;">
-					</div>
-				</div>
-			</form>
-	</div>
-
+	<script type="text/x-paperclip" id="metrics">
+	{% include "./templates/metrics.html" %}
+	</script>
+	<script type="text/x-paperclip" id="form-resolve-template">
+	{% include "./templates/form-resolve.html" %}
+	</script>
+	<script type="text/x-paperclip" id="modal-generate-template">
+	{% include "./templates/modal-generate.html" %}
+	</script>
 </div>
 
-<div id="modal-generate" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Modal title</h4>
-			</div>
-			<div class="modal-body">
-				<form class="form-horizontal">
-					<div class="form-group">
-						<label for="modal-generate-input-range" class="col-sm-2 control-label">Range</label>
-						<div class="col-sm-10" id="select-range-handle">
-							<!-- see templates/select-range.html -->
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="modal-generate-input-size" class="col-sm-2 control-label">Number</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="modal-generate-input-size" placeholder="">
-						</div>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button id="modal-generate-submit" class="btn btn-primary">Generate</button>
-			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-{% include "./templates/select-range.html" %}
-<script type="text/x-paperclip" id="count-range-template">[[ count ]] </script>
-<script type="text/x-paperclip" id="count-identifier-template">[[ count ]] </script>
 
 {% endblock %}
 
