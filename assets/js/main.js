@@ -21,10 +21,12 @@ $(document).ready(function() {
         ranges : [],
         range: "",
         size: "",
+        label: "Generate",
         generate: true,
         handleGenerate : function(event) {
           $('#modal-generate-spinner').show();
           view1.set('generate', false);
+          view1.set('label', String("0").concat('%'));
           var formData = {
             range: view1.get('range'),
             size : Number(view1.get('size'))
@@ -38,8 +40,11 @@ $(document).ready(function() {
           .done(function(data) {
               var where = CSV.stringify(["bundle", "=", data], ' ');
               heart.createEvent(20, {name: 'spin', repeat: 0},function(heartbeat, last){
-                  oboe(url + '/$count?' + qs.stringify({ where: where})).done(function(results) {
-                      if (formData.size >= results[0].value) {
+                  oboe(url + '/$count?' + qs.stringify({ where: where}))
+                  .done(function(results) {
+                      console.log(url + '/$count?' + qs.stringify({ where: where}), results);
+                      view1.set('label', String((Number(results[0].value) * 100)/formData.size).concat('%'));
+                      if (formData.size <= results[0].value) {
                         window.location.href = document.location.protocol + '//' + document.location.host + '/' + formData.range + '/*?' + qs.stringify({
                             where : where,
                             alt: "csv"
@@ -48,13 +53,12 @@ $(document).ready(function() {
                         metrics();
                         $('#modal-generate').modal('toggle');
                         view1.set('generate', true);
+                        view1.set('label', "Generate");
+                        view1.set('size', 0);
                         $('#modal-generate-spinner').hide();
                       }
                   })
               });
-          })
-          .always(function() {
-              console.log("Request", url, formData);
           })
           .fail(function( jqXHR, textStatus ) {
               $('#modal-generate').modal('toggle');
@@ -66,12 +70,14 @@ $(document).ready(function() {
     });
     var view2 = view('metrics', {
         countRanges: 0,
-        countIdentifiers: 0
+        countIdentifiers: 0,
+        countBundles: 0
     });
     var view4 = view('form-resolve-template', {
       name: "",
       handleResolve : function(event) {
-        window.location.href = document.location.protocol + '//' + document.location.host + $("#form-resolve-addon-ark").text() + view4.get('name');
+        console.log(document.location.protocol + '//' + document.location.host + '/' + $("#form-resolve-addon-ark").text() + view4.get('name'));
+        window.location.href = document.location.protocol + '//' + document.location.host + '/' + $("#form-resolve-addon-ark").text() + view4.get('name');
         return false;
       }
     });
@@ -84,10 +90,11 @@ $(document).ready(function() {
           async.map(ranges.map(function(item) {
                 return item['@id'] + '/$count';
             }), function(url, callback) {
-              console.log('fetch', url);
-              oboe(url).done(function(ranges) {
+              oboe(url)
+              .done(function(ranges) {
                   callback(null, Number(ranges[0].value));
-              }).fail(function() {
+              })
+              .fail(function() {
                   callback(null, 0);
               })
             }, function(err, results) {
@@ -97,14 +104,13 @@ $(document).ready(function() {
           async.map(ranges.map(function(item) {
                 return item['@id'] + '/$distinct?field=bundle';
             }), function(url, callback) {
-              console.log('fetch', url);
               oboe(url).done(function(ranges) {
                   callback(null, Number(ranges.length));
               }).fail(function() {
                   callback(null, 0);
               })
             }, function(err, results) {
-              view2.set( 'countRanges', results.reduce(function(pv, cv) { return pv + cv; }, 0));
+              view2.set( 'countBundles', results.reduce(function(pv, cv) { return pv + cv; }, 0));
           });
 
 

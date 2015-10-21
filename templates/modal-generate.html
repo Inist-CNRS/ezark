@@ -3,14 +3,14 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title">Generate ARK for specitic authority.</h4>
+				<h4 class="modal-title">Generate new ARK</h4>
 			</div>
 			<div class="modal-body">
 				<!-- see templates/select-range.html -->
 				<form class="form-horizontal" onsubmit=[[handleGenerate]]>
 					<div class="form-group">
-						<label for="modal-generate-input-range" class="col-sm-2 control-label">Range</label>
-						<div class="col-sm-10" id="select-range-handle">
+						<label for="modal-generate-input-range" class="col-sm-4 control-label">Range</label>
+						<div class="col-sm-8" id="select-range-handle">
               <select class="form-control" id="modal-generate-input-range" value="[[ <~>range ]]">
                 <repeat each="[[ ranges ]]" as="rg">
                 <option> [[ rg._wid ]] </option>
@@ -19,16 +19,22 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="modal-generate-input-size" class="col-sm-2 control-label">Number</label>
-						<div class="col-sm-10">
+						<label for="modal-generate-input-size" class="col-sm-4 control-label">Number</label>
+						<div class="col-sm-8">
 							<input type="text" class="form-control" value="[[ <~>size ]]">
 						</div>
 					</div>
+          <div class="form-group">
+						<label for="modal-generate-input-size" class="col-sm-4 control-label">Secure Token</label>
+						<div class="col-sm-8">
+              <input type="text" class="form-control" value="[[ <~>token ]]">
+            </div>
+          </div>
 				</form>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="submit" class="btn btn-primary"  enable="[[generate]]" onclick=[[handleGenerate]]><span id="modal-generate-spinner" style="display:none" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Generate</button>
+				<button type="submit" class="btn btn-primary"  enable="[[generate]]" onclick=[[handleGenerate]]><span id="modal-generate-spinner" style="display:none" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> [[ <~>label ]]</button>
 			</div>
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal-dialog -->

@@ -4,7 +4,11 @@ var path = require('path')
   , debug = require('debug')('castor:loaders:' + basename)
   , clone = require('clone')
   , farmhash = require('farmhash')
-  , checkdigit = require('checkdigit');
+  , checkdigit = require('checkdigit')
+  , loop = require('serial-loop')
+  , pad = require('pad')
+  ;
+
 
 module.exports = function(options) {
   options = options || {};
@@ -12,7 +16,10 @@ module.exports = function(options) {
   options.range = Number(options.range.replace('R', '') || 0);
   options.size = Number(options.size || 1);
   options.pad = "0000000000000";
-  return function (input, submit) {
+  return function (input, submit, conf) {
+    var concurrency = conf.concurrency || 1
+      , delay       = conf.delay || 100
+      ;
     if (options.naan === undefined) {
       return submit(new Error('NAAN not defined'), null);
     }
@@ -25,18 +32,28 @@ module.exports = function(options) {
     if (Number.isNaN(options.size) || options.size < 1) {
       return submit(new Error('Size is not valid'), null);
     }
-    for (var i = 0; i < options.size; i++) {
-      var rag = String(options.range);
-      var doc = clone(input, false);
-      var hash = farmhash.hash32WithSeed(input.fid, i);
-      var id = rag.concat(hash);
-      var vid = checkdigit.mod10.apply(id);
-      var pid = options.pad.substring(0, options.pad.length - vid.length) + vid
-      doc._wid = pid;
-      doc.ark = 'ark:/' + options.naan + '/' + pid;
-      doc.bundle = doc.filename.replace(doc.directory, '').replace(doc.extension, '').slice(1, -1);
-      var qe = submit(doc);
-    }
-    submit();
-  }
+   loop(options.size, function each (next, i) {
+       var rag = String(options.range);
+       rag = pad(2, rag, '0');
+       var doc = clone(input, false);
+       var hash = farmhash.hash32WithSeed(input.fid, i)
+       hash = pad(10, hash, '0');
+       var id = rag.concat(hash);
+       var vid = checkdigit.mod10.apply(id);
+       vid = pad(13, vid, '0')
+
+       doc._wid = vid;
+       doc.ark = 'ark:/' + options.naan + '/' + vid;
+       doc.bundle = doc.filename.replace(doc.directory, '').replace(doc.extension, '').slice(1, -1);
+       var qe = submit(doc);
+       if (qe.length() >= concurrency) {
+         setTimeout(function () {
+             next();
+         }, delay)
+       }
+       else {
+         next();
+       }
+   }, submit);
+ }
 }

@@ -19,14 +19,14 @@ module.exports = function(model) {
       fill( {
           value : 'ark:/' + req.ark.naan + '/' + req.ark.name,
           name: req.ark.name,
-          range: req.ark.name.substring(0, 1),
-          hash: req.ark.name.substring( 1, -1),
+          range: req.ark.name.substring(0, 2),
+          hash: req.ark.name.substring( 2, -1),
           naan : req.ark.naan
         }
       )
   })
   .prepend('collectionName', function(req, fill) {
-      fill('range_' + this.ark.range);
+      fill('R' + this.ark.range);
   })
   .append('range', function(req, fill) {
       if (this.mongoCollectionsIndexHandle instanceof Error) {
