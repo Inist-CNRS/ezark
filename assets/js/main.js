@@ -43,7 +43,7 @@ $(document).ready(function() {
                   oboe(url + '/$count?' + qs.stringify({ where: where}))
                   .done(function(results) {
                       console.log(url + '/$count?' + qs.stringify({ where: where}), results);
-                      view1.set('label', String((Number(results[0].value) * 100)/formData.size).concat('%'));
+                      view1.set('label', String(Math.round((Number(results[0].value) * 100)/formData.size)).concat('%'));
                       if (formData.size <= results[0].value) {
                         window.location.href = document.location.protocol + '//' + document.location.host + '/' + formData.range + '/*?' + qs.stringify({
                             where : where,
