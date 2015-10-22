@@ -5,25 +5,15 @@
 var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('castor:models:' + basename)
-  , checkdigit = require('checkdigit')
+  , ARK = require('../helpers/ark.js')
   ;
 
-module.exports = function(model) {
+ module.exports = function(model) {
   model
   .declare('ark', function(req, fill) {
       var Errors = req.config.get('Errors');
-
-      if (checkdigit.mod10.isValid(req.ark.name) === false) {
-        return fill(new Errors.InvalidParameters('Identifier is not valid.'));
-      }
-      fill( {
-          value : 'ark:/' + req.ark.naan + '/' + req.ark.name,
-          name: req.ark.name,
-          range: req.ark.name.substring(0, 2),
-          hash: req.ark.name.substring( 2, -1),
-          naan : req.ark.naan
-        }
-      )
+      var identifier = new ARK(req.config.get('naan'));
+      fill(identifier.parse('ark:/' + req.ark.naan + '/' + req.ark.name));
   })
   .prepend('collectionName', function(req, fill) {
       fill('R' + this.ark.range);
