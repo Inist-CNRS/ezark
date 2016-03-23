@@ -1,7 +1,7 @@
-castor-boilerplate:
+ezark:
   image: node:4.4.0
   links:
-    - castor-boilerplate_db:mongodb
+    - ezark_db:mongodb
   volumes:
     - .:/app
   environment:
@@ -12,8 +12,8 @@ castor-boilerplate:
   working_dir: /app
   ports:
     - 3000:3000
-  command: ./castor-boilerplate
+  command: ./ezark
 
-castor-boilerplate_db:
+ezark_db:
   image: mongo:3.0.7
   command: --smallfiles

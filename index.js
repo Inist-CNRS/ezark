@@ -7,7 +7,7 @@ var mongoHostPort = process.env.MONGODB_PORT ? process.env.MONGODB_PORT.replace(
 module.exports = {
   "connectionURI": 'mongodb://' + mongoHostPort + '/ezark',
   "collectionName": "data",
-  "browserifyModules" : [ "qs", "heartbeats", "async", "jquery", "oboe", "paperclip/lib/node.js", "csv-string" ],
+  "browserifyModules" : [ "qs", "heartbeats", "async", "jquery", "oboe", "vue", "vue-resource", "csv-string" ],
   "rootURL" : "index.html",
   "loaders": [
     {

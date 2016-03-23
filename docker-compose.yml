@@ -1,7 +1,7 @@
-castor-boilerplate:
-  image: inistcnrs/castor-boilerplate:latest
+ezark:
+  image: inistcnrs/ezark:latest
   links:
-    - castor-boilerplate_db:mongodb
+    - ezark_db:mongodb
   volumes:
     - ./data:/app/data
     - ./config.local.js:/app/config.local.js
@@ -12,6 +12,6 @@ castor-boilerplate:
   ports:
     - 3000:3000
 
-castor-boilerplate_db:
+ezark_db:
   image: mongo:3.0.7
   command: --smallfiles

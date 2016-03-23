@@ -13,23 +13,13 @@
 </div>
 
 <div class="container">
-	<script type="text/x-paperclip" id="metrics">
-	{% include "./templates/metrics.html" %}
-	</script>
-	<script type="text/x-paperclip" id="form-resolve-template">
-	{% include "./templates/form-resolve.html" %}
-	</script>
-	<script type="text/x-paperclip" id="modal-generate-template">
-	{% include "./templates/modal-generate.html" %}
-	</script>
+	{{ component('metrics') }}
+	{{ component('form-resolve') }}
+	{{ component('modal-generate') }}
 </div>
 
 
 {% endblock %}
 
 
-
-{% block scripts %}
-<script type="text/javascript" charset="utf-8" src="/assets/js/main.js"></script>
-{% endblock %}
 
