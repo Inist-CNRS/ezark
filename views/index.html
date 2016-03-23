@@ -13,9 +13,113 @@
 </div>
 
 <div class="container">
-	{{ component('metrics') }}
-	{{ component('form-resolve') }}
-	{{ component('modal-generate') }}
+	<div class="row" id="metrics">
+		<div class="col-xs-6 col-md-3">
+			<div class="panel status panel-info">
+				<div class="panel-heading">
+					<h1 class="panel-title text-center">
+						{{ config.NAAN|d('?') }}
+					</h1>
+				</div>
+				<div class="panel-body text-center">
+					<strong>NAAN</strong>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-6 col-md-3">
+			<div class="panel status panel-warning">
+				<div class="panel-heading">
+					<h1 class="panel-title text-center" id="count-range-handle">
+						[[ countRanges ]]
+					</h1>
+				</div>
+				<div class="panel-body text-center">
+					<strong>Ranges</strong>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-6 col-md-3">
+			<div class="panel status panel-success">
+				<div class="panel-heading">
+					<h1 class="panel-title text-center" id="count-identifier-handle">
+						[[ countIdentifiers ]]
+					</h1>
+				</div>
+				<div class="panel-body text-center">
+					<strong>Identifiers</strong>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-6 col-md-3">
+			<div class="panel status panel-info">
+				<div class="panel-heading">
+					<h1 class="panel-title text-center">
+						[[ countBundles ]]
+					</h1>
+				</div>
+				<div class="panel-body text-center">
+					<strong>Bundles</strong>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="form-resolve" class="row">
+		<form id="form-resolve" onsubmit=[[handleResolve]]>
+			<div class="col-sm-3">
+			</div>
+			<div class="form-group form-group-lg  col-sm-6">
+				<div class="input-group">
+					<div id="form-resolve-addon-ark" class="input-group-addon" style="font-size:2em; font-weight:bold;">ark:/{{ config.NAAN|d('?') }}/</div>
+					<input type="text" class="form-control" style="font-size:2em;" value="[[ <~>name ]]" onEnter=[[handleResolve]] />
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div id="modal-generate" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Generate new ARK</h4>
+				</div>
+				<div class="modal-body">
+					<!-- see templates/select-range.html -->
+					<form class="form-horizontal" onsubmit=[[handleGenerate]]>
+						<div class="form-group">
+							<label for="modal-generate-input-range" class="col-sm-4 control-label">Range</label>
+							<div class="col-sm-8" id="select-range-handle">
+								<select class="form-control" id="modal-generate-input-range" v-model="range">
+									<option v-for="rg in ranges" v-bind:value="rg._wid">
+									[[ rg._wid ]]
+									</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="modal-generate-input-size" class="col-sm-4 control-label">Number</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" v-model="size">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="modal-generate-input-size" class="col-sm-4 control-label">Secure Token</label>
+							<div class="col-sm-8">
+								<input type="text" class="form-control" v-model="token">
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary"  enable="[[generate]]" onclick=[[handleGenerate]]><span id="modal-generate-spinner" style="display:none" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> [[ <~>label ]]</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+
 </div>
 
 

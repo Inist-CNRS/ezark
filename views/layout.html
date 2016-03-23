@@ -1,12 +1,3 @@
-{% macro component(name) %}
-{% include "./components/" + name + ".html" %}
-<script>
-{% include "./components/" + name + ".js" %}
-</script>
-<style>
-{% include "./components/" + name + ".css" %}
-</style>
-{% endmacro %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -44,14 +35,6 @@
 
       {% block styles %}{% endblock %}
 
-      <script type="text/javascript" charset="utf-8" src="/libs.js"></script>
-      <script type="text/javascript" charset="utf-8">
-      var $ = jQuery = require('jquery');
-      var Vue = require('vue');
-      Vue.config.delimiters = ['[[', ']]'];
-      Vue.use(require('vue-resource'));
-      </script>
-
   </head>
 
   <body>
@@ -64,17 +47,20 @@
     <!-- Bootstrap core JavaScript
       ================================================== -->
       <!-- Placed at the end of the document so the pages load faster -->
-      <script type="text/javascript" charset="utf-8" src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-      <script type="text/javascript" charset="utf-8" src="/libs/bootstrap-material-design/dist/js/ripples.min.js"></script>
-      <script type="text/javascript" charset="utf-8" src="/libs/bootstrap-material-design/dist/js/material.min.js"></script>
-      <script type="text/javascript" charset="utf-8">
+      <script src="/libs.js"></script>
+      <script src="/libs/jquery/dist/jquery.min.js"></script>
+      <script src="/libs/jquery-migrate/dist/jquery-migrate.min.js"></script>
+      <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+      <script src="/libs/bootstrap-material-design/dist/js/ripples.min.js"></script>
+      <script src="/libs/bootstrap-material-design/dist/js/material.min.js"></script>
+      <script>
 $(document).ready(function() {
   // This command is used to initialize some elements and make them work properly
   $.material.init();
 });
       </script>
-
-      {% block scripts %}{% endblock %}
+      <script src="/assets/js/main.js"></script>
+     {% block scripts %}{% endblock %}
   </body>
 </html>
 
