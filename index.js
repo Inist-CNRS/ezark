@@ -1,9 +1,14 @@
+'use strict'
+// to allow mongodb host and port injection thanks
+// to the MONGODB_PORT environment parameter
+// (docker uses it)
+var mongoHostPort = process.env.MONGODB_PORT ? process.env.MONGODB_PORT.replace('tcp://', '') : 'localhost:27017';
+
 module.exports = {
-  "connectionURI": 'mongodb://localhost:27017/ezark/',
+  "connectionURI": 'mongodb://' + mongoHostPort + '/ezark',
+  "collectionName": "data",
   "browserifyModules" : [ "qs", "heartbeats", "async", "jquery", "oboe", "paperclip/lib/node.js", "csv-string" ],
   "rootURL" : "index.html",
-  "collectionsIndexName" : "index",
-  "collectionName" :       "index",
   "loaders": [
     {
       "script": "castor-load-json",

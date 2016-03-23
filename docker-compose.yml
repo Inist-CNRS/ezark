@@ -1,0 +1,17 @@
+castor-boilerplate:
+  image: inistcnrs/castor-boilerplate:latest
+  links:
+    - castor-boilerplate_db:mongodb
+  volumes:
+    - ./data:/app/data
+    - ./config.local.js:/app/config.local.js
+  environment:
+    http_proxy:  ${http_proxy}
+    https_proxy: ${https_proxy}
+    NODE_ENV: ${NODE_ENV}
+  ports:
+    - 3000:3000
+
+castor-boilerplate_db:
+  image: mongo:3.0.7
+  command: --smallfiles
