@@ -86,7 +86,7 @@
 				</div>
 				<div class="modal-body">
 					<!-- see templates/select-range.html -->
-					<form class="form-horizontal" onsubmit=[[handleGenerate]]>
+					<form class="form-horizontal" v-on:submit.stop="handleGenerate">
 						<div class="form-group">
 							<label for="modal-generate-input-range" class="col-sm-4 control-label">Range</label>
 							<div class="col-sm-8" id="select-range-handle">
@@ -113,7 +113,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary"  enable="[[generate]]" onclick=[[handleGenerate]]><span id="modal-generate-spinner" style="display:none" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> [[ <~>label ]]</button>
+					<button type="submit" class="btn btn-primary"  enable="[[generate]]" onclick=[[handleGenerate]]><span id="modal-generate-spinner" style="display:none" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> [[ label ]]</button>
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->

@@ -20,8 +20,13 @@
   "license": "MIT",
   "dependencies": {
     "anglicize": "https://github.com/azer/anglicize",
+    "babel-core": "^6.0.0",
+    "babel-loader": "^6.0.0",
+    "babel-plugin-transform-runtime": "^6.0.0",
+    "babel-preset-es2015": "^6.0.0",
+    "babel-preset-stage-2": "^6.0.0",
     "body-parser": "^1.14.1",
-    "castor-core": "^3.8.2",
+    "castor-core": "^3.9.1",
     "castor-load": "^4.4.3",
     "castor-load-json": "^1.0.0",
     "checkdigit": "^1.1.1",
@@ -39,7 +44,10 @@
     "to-slug": "https://github.com/touv/to-slug",
     "to-slug-case": "https://github.com/ianstormtaylor/to-slug-case",
     "vue": "^1.0.18",
-    "vue-resource": "^0.7.0"
+    "vue-html-loader": "^1.2.0",
+    "vue-loader": "^8.2.1",
+    "vue-resource": "^0.7.0",
+    "vue-style-loader": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",

@@ -9,7 +9,9 @@ module.exports = {
   "collectionName": "data",
   "browserifyModules" : [
     "qs", "heartbeats", "async", "vue", "vue-resource", "csv-string",
-    "components/metrics"
+    "components/metrics",
+    "components/modal-generate",
+    "components/form-resolve",
   ],
   "rootURL" : "index.html",
   "loaders": [
