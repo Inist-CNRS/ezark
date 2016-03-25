@@ -65,13 +65,13 @@
 	</div>
 
 	<div id="form-resolve" class="row">
-		<form id="form-resolve" onsubmit=[[handleResolve]]>
+		<form id="form-resolve"  v-on:submit.prevent="handleResolve">
 			<div class="col-sm-3">
 			</div>
 			<div class="form-group form-group-lg  col-sm-6">
 				<div class="input-group">
 					<div id="form-resolve-addon-ark" class="input-group-addon" style="font-size:2em; font-weight:bold;">ark:/{{ config.NAAN|d('?') }}/</div>
-					<input type="text" class="form-control" style="font-size:2em;" value="[[ <~>name ]]" onEnter=[[handleResolve]] />
+					<input type="text" class="form-control" style="font-size:2em;" v-model="name"  v-on:keyup.enter="handleResolve" />
 				</div>
 			</div>
 		</form>
@@ -86,7 +86,7 @@
 				</div>
 				<div class="modal-body">
 					<!-- see templates/select-range.html -->
-					<form class="form-horizontal" v-on:submit.stop="handleGenerate">
+					<form class="form-horizontal" v-on:submit.prevent="handleGenerate">
 						<div class="form-group">
 							<label for="modal-generate-input-range" class="col-sm-4 control-label">Range</label>
 							<div class="col-sm-8" id="select-range-handle">
@@ -113,7 +113,9 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary"  enable="[[generate]]" onclick=[[handleGenerate]]><span id="modal-generate-spinner" style="display:none" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> [[ label ]]</button>
+					<button type="submit" class="btn btn-primary" v-on:click="handleGenerate">
+						<span id="modal-generate-spinner" style="display:none" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> [[ label ]]
+					</button>
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->

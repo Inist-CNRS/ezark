@@ -16,14 +16,18 @@ module.exports = function(router, core) {
 
   router
   .route('/-/generator')
-  .post(bodyParser.urlencoded({ extended: true}))
+  .post(bodyParser.json()) // for this.$http.post (vue-resource)
+  .post(bodyParser.urlencoded({ extended: true})) // for $.ajax (jquery)
+  /*
   .post(validate({
         body : {
-          size:  Joi.string().regex(/[0-9]+/).required(),
+         size:  Joi.string().regex(/[0-9]+/).required(),
           range: Joi.string().regex(/[0-9]+/).required()
         }
-  }))
+      }))
+      */
   .post(function(req, res, next) {
+    debug('debug', req.body);
       var loaderOptions = {
         "collectionName" : req.body.range,
         "connexionURI" : req.config.get('connectionURI'),

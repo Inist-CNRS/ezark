@@ -8,7 +8,12 @@ module.exports = {
   "connectionURI": 'mongodb://' + mongoHostPort + '/ezark',
   "collectionName": "data",
   "browserifyModules" : [
-    "qs", "heartbeats", "async", "vue", "vue-resource", "csv-string",
+    "qs", 
+    "mongodb-querystring",
+    "heartbeats",
+    "async", 
+    "vue", 
+    "vue-resource", 
     "components/metrics",
     "components/modal-generate",
     "components/form-resolve",
