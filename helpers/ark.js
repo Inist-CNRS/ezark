@@ -22,24 +22,29 @@ ARK.prototype = {
     debug(input, seed, hash);
     hash = pad(10, hash, '0');
     var id = this.range.concat(hash);
+    /*
     var vid = checkdigit.mod10.apply(id);
     vid = pad(13, vid, '0')
-    return 'ark:/' + this.naan + '/' + vid;
+    */
+    return 'ark:/' + this.naan + '/' + id;
   },
   parse: function (str) {
     var seg = str.split('/');
+    debug(seg, this.naan);
     if (seg.length != 3) {
       throw new Error('Invalid identifier');
     }
     if (seg[0] !== 'ark:') {
       throw new Error('Unknow identifier');
     }
-    if (seg[1] == this.naan) {
+    if (seg[1] !== this.naan) {
       throw new Error('Unknow NAAN');
     }
+    /*
     if (checkdigit.mod10.isValid(seg[2]) === false) {
       throw new Error('Corrompted identifier');
     }
+    */
     return {
       value : str,
       name: seg[2],

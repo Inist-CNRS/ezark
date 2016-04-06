@@ -16,16 +16,13 @@ var path = require('path')
       fill(identifier.parse('ark:/' + req.ark.naan + '/' + req.ark.name));
   })
   .prepend('collectionName', function(req, fill) {
-      fill('R' + this.ark.range);
+      fill(this.ark.range);
   })
   .append('range', function(req, fill) {
-      if (this.mongoCollectionsIndexHandle instanceof Error) {
-        return fill();
-      }
       var q = {
         _wid: this.collectionName
       };
-      this.mongoCollectionsIndexHandle.findOne(q).then(function(doc) {
+      this.mongoDatabaseHandle.collectionsIndex().findOne(q).then(function(doc) {
           if (doc === null && req.routeParams.resourceName !== 'index') {
             fill(new Error('Range unknown.'));
           }
@@ -35,9 +32,6 @@ var path = require('path')
       }).catch(fill);
   })
   .append('target', function(req, fill) {
-      if (this.mongoDatabaseHandle instanceof Error) {
-        return fill();
-      }
       var q = {
         ark: this.ark.value
       };
@@ -51,8 +45,8 @@ var path = require('path')
       }).catch(fill);
   })
   .send(function(res, next) {
-      var self = this;
-      res.send(self.range.content.json.target + '/' + self.target.ark)
+    var self = this;
+    res.send(self.range._content.json.target + '/' + self.target.ark)
   })
 
   return model;

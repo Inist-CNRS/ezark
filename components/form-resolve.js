@@ -8,8 +8,8 @@ module.exports = new Vue({
   },
   methods: {
     handleResolve : function(event) {
-      console.log(document.location.protocol + '//' + document.location.host + '/' + $("#form-resolve-addon-ark").text() + view4.get('name'));
-      window.location.href = document.location.protocol + '//' + document.location.host + '/' + $("#form-resolve-addon-ark").text() + view4.get('name');
+      console.log(document.location.protocol + '//' + document.location.host + '/' + $("#form-resolve-addon-ark").text() + this.name);
+      window.location.href = document.location.protocol + '//' + document.location.host + '/' + $("#form-resolve-addon-ark").text() + this.name;
       return false;
     }
   }

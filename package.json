@@ -28,6 +28,7 @@
     "body-parser": "^1.14.1",
     "castor-core": "^3.9.1",
     "castor-load": "^4.4.3",
+    "castor-load-excel": "^3.0.0",
     "castor-load-json": "^1.0.0",
     "checkdigit": "^1.1.1",
     "clone": "^1.0.2",

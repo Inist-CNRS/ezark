@@ -7,13 +7,14 @@ var mongoHostPort = process.env.MONGODB_PORT ? process.env.MONGODB_PORT.replace(
 module.exports = {
   "connectionURI": 'mongodb://' + mongoHostPort + '/ezark',
   "collectionName": "data",
+  "collectionsIndexName" : "data",
   "browserifyModules" : [
-    "qs", 
+    "qs",
     "mongodb-querystring",
     "heartbeats",
-    "async", 
-    "vue", 
-    "vue-resource", 
+    "async",
+    "vue",
+    "vue-resource",
     "components/metrics",
     "components/modal-generate",
     "components/form-resolve",
@@ -21,16 +22,17 @@ module.exports = {
   "rootURL" : "index.html",
   "loaders": [
     {
-      "script": "castor-load-json",
-      "pattern": "**/*.json"
+      "require" : 'castor-load-excel',
+      "pattern" : '**/*.xlsx'
     },
     {
       "script": "range.js",
-      "pattern": "**/*.json"
+      "pattern" : '**/*.xlsx'
     }
   ],
   "routes": [
     "echo.js",
+    "status.js",
     "generator.js",
     "resolver.js",
     "table.js"
