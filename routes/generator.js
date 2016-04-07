@@ -28,35 +28,43 @@ module.exports = function(router, core) {
       */
   .post(function(req, res, next) {
     debug('debug', req.body);
-      var loaderOptions = {
-        "collectionName" : req.body.range,
-        "connexionURI" : req.config.get('connectionURI'),
-        "concurrency" : req.config.get('concurrency'),
-        "delay" : req.config.get('delay'),
-        "maxFileSize" : req.config.get('maxFileSize'),
-        "writeConcern" : req.config.get('writeConcern'),
-        "ignore" : req.config.get('filesToIgnore'),
-        "watch" : false
+    var range = req.body.range.toLocaleLowerCase();
+    var size = req.body.size;
+    var loaderOptions = {
+      "collectionName" : range,
+      "connexionURI" : req.config.get('connectionURI'),
+      "concurrency" : req.config.get('concurrency'),
+      "delay" : req.config.get('delay'),
+      "maxFileSize" : req.config.get('maxFileSize'),
+      "writeConcern" : req.config.get('writeConcern'),
+      "ignore" : req.config.get('filesToIgnore'),
+      "watch" : false
+    }
+    var documentURL = {
+      protocol: "http",
+      hostname: "127.0.0.1",
+      port: req.config.get('port'),
+      query: {
+        plain : size
       }
-      var documentURL = {
-        protocol: "http",
-        hostname: "127.0.0.1",
-        port: req.config.get('port'),
-        query: {
-          plain : req.body.size
-        }
-      }
-      var arkOptions = {
-        range: req.body.range,
-        naan: req.config.get('NAAN'),
-        size: req.body.size
-      }
-      var  listname = shortid.generate();
-      documentURL.pathname = "/-/echo/" + listname + ".list";
-      var ldr;
-      ldr = new Loader(__dirname, loaderOptions);
-      ldr.use('**/*', require('../loaders/bundle.js')(arkOptions));
-      ldr.push(url.format(documentURL));
-      res.send(listname);
+    }
+    var arkOptions = {
+      range: range,
+      naan: req.config.get('NAAN'),
+      size: size
+    }
+
+    process.env['HTTP_PROXY'] = null;
+    process.env['HTTPS_PROXY'] = null;
+    process.env['http_proxy'] = null;
+    process.env['https_proxy'] = null;
+
+    var  listname = shortid.generate();
+    documentURL.pathname = "/-/echo/" + listname + ".list";
+    var ldr;
+    ldr = new Loader(__dirname, loaderOptions);
+    ldr.use('**/*', require('../loaders/bundle.js')(arkOptions));
+    ldr.push(url.format(documentURL));
+    res.send(listname);
   })
 }

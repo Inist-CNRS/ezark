@@ -26,7 +26,7 @@
     "babel-preset-es2015": "^6.0.0",
     "babel-preset-stage-2": "^6.0.0",
     "body-parser": "^1.14.1",
-    "castor-core": "^3.11.0",
+    "castor-core": "^3.12.0",
     "castor-load": "^4.4.3",
     "castor-load-excel": "^3.0.0",
     "castor-load-json": "^1.0.0",

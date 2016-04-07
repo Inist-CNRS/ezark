@@ -11,7 +11,7 @@ var path = require('path')
 module.exports = function(options) {
   options = options || {};
   options.size = Number(options.size || 1);
-  var identfifer = new ARK(options.naan, options.range);
+  var identfifer = new ARK(options.naan, String(options.range).toLocaleLowerCase());
 
   return function (input, submit, conf) {
     var concurrency = conf.concurrency || 1

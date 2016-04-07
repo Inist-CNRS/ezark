@@ -40,7 +40,7 @@ module.exports = new Vue({
           self.$http.get(url + '/$count?' + mqs.stringify(qry, {})).then(function(response) {
             self.$set('label', String(Math.round((Number(response.data[0].value) * 100)/formData.size)).concat('%'));
             if (formData.size <= response.data[0].value) {
-              window.location.href = document.location.protocol + '//' + document.location.host + '/' + formData.range + '/*?' + mqs.stringify({
+              window.location.href = document.location.protocol + '//' + document.location.host + '/' + formData.range.toLocaleLowerCase() + '/*?' + mqs.stringify({
                 "$query" : {
                   "bundle" : result.data
                 },
