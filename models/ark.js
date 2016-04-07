@@ -12,7 +12,7 @@ var path = require('path')
   model
   .declare('ark', function(req, fill) {
       var Errors = req.config.get('Errors');
-      var identifier = new ARK(req.config.get('naan'));
+      var identifier = new ARK(req.config.get('NAAN'));
       fill(identifier.parse('ark:/' + req.ark.naan + '/' + req.ark.name));
   })
   .prepend('collectionName', function(req, fill) {

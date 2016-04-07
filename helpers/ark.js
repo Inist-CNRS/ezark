@@ -2,7 +2,9 @@
 var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('castor:helpers:' + basename)
-  , checkdigit = require('checkdigit')
+    /*
+   , checkdigit = require('checkdigit')
+     */
   , pad = require('pad')
   , farmhash = require('farmhash')
   ;

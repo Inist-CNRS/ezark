@@ -9,7 +9,6 @@ module.exports = {
   "collectionName": "data",
   "collectionsIndexName" : "data",
   "browserifyModules" : [
-    "qs",
     "mongodb-querystring",
     "heartbeats",
     "async",
@@ -37,21 +36,17 @@ module.exports = {
     "resolver.js",
     "table.js"
   ],
-  "flyingFields": {
+  "publicFields": {
     "$ark": {
-      "label" : "ARK",
-      "scheme" : "http://purl.org/dc/elements/1.1/identifier",
       "get": "ark"
     },
     "$range": {
-      "label" : "Sous autorité",
-      "get": "_wid",
-      "truncate": 2
+      "get": "_table._wid"
     },
     "$batchID": {
-      "label" : "N° lot",
       "get": "bundle"
-    }
+    },
+    "mask" : "ark,range,batchID"
   }
 };
 module.exports.package = require('./package.json');

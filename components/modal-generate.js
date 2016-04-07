@@ -6,7 +6,7 @@ module.exports = new Vue({
   el: '#modal-generate',
   ready: function() {
     var self = this;
-    self.$http.get(window.location.protocol + '//' + window.location.host + '/data/*?alt=raw').then(function (response) {
+    self.$http.get(window.location.protocol + '//' + window.location.host + '/data/*').then(function (response) {
       self.$set('ranges', response.data);
     }, console.error);
   },
