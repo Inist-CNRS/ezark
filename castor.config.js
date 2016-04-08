@@ -36,18 +36,6 @@ module.exports = {
     "resolver.js",
     "table.js"
   ],
-  "publicFields": {
-    "$ark": {
-      "get": "ark"
-    },
-    "$range": {
-      "get": "_table._wid"
-    },
-    "$batchID": {
-      "get": "bundle"
-    },
-    "mask" : "ark,range,batchID"
-  },
   "defaultColumns": {
     "ark": {
       "label" : "Archive Resource Key",
