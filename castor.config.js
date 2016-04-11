@@ -57,7 +57,7 @@ module.exports = {
       "get": "bundle"
     }
   },
-  "hotfolderColumns" : {
+  "indexColumns" : {
     "range" : {
       "label" : "Sub publisher prefix",
       "scheme" : "http://purl.org/dc/elements/1.1/identifier",
@@ -84,6 +84,6 @@ module.exports = {
       "get" : "_content.json.target"
     }
   },
-  'allowedAltValues':     ['csv', 'jsonld', 'jbj', 'xls', 'tsv']
+  'allowedAltValues':     ['csv', 'jsonld', 'jbj', 'xls', 'tsv', 'dry', 'raw']
 };
 module.exports.package = require('./package.json');
