@@ -8,7 +8,7 @@ module.exports = new Vue({
       var ranges = response.data
       this.$set('countRanges', ranges.length);
       async.map(ranges.map(function(item) {
-        return item['@id'] + '/$count';
+        return item['_id'] + '/$count';
       }), function(url, callback) {
         self.$http.get(url).then(function (response) {
           if (response.data[0]) {
@@ -25,7 +25,7 @@ module.exports = new Vue({
       });
 
       async.map(ranges.map(function(item) {
-        return item['@id'] + '/$distinct?field=bundle';
+        return item['_id'] + '/$distinct?field=bundle';
       }), function(url, callback) {
         self.$http.get(url).then(function (response) {
           callback(null, Number(response.data.length));

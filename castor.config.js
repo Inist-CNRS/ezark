@@ -16,6 +16,7 @@ module.exports = {
     "vue-resource",
     "components/metrics",
     "components/modal-generate",
+    "components/modal-addsubpub",
     "components/form-resolve",
   ],
   "rootURL" : "index.html",
