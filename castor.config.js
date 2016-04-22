@@ -22,12 +22,8 @@ module.exports = {
   "rootURL" : "index.html",
   "loaders": [
     {
-      "require" : 'castor-load-excel',
-      "pattern" : '**/*.xlsx'
-    },
-    {
-      "script": "range.js",
-      "pattern" : '**/*.xlsx'
+      "script": "subpub.js",
+      "pattern" : '**/*.new'
     }
   ],
   "routes": [
@@ -35,7 +31,8 @@ module.exports = {
     "status.js",
     "generator.js",
     "resolver.js",
-    "table.js"
+    "addsubpub.js",
+    "rest-crud.js"
   ],
   "defaultColumns": {
     "ark": {

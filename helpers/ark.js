@@ -23,7 +23,7 @@ ARK.prototype = {
     var hash = farmhash.hash32WithSeed(input, Number(seed || 0))
     debug(input, seed, hash);
     hash = pad(10, hash, '0');
-    var id = this.range.concat(hash);
+    var id = this.range.concat('-').concat(hash);
     /*
     var vid = checkdigit.mod10.apply(id);
     vid = pad(13, vid, '0')

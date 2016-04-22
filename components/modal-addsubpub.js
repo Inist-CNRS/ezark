@@ -14,23 +14,26 @@ module.exports = new Vue({
     generate: true
   },
   methods : {
-    handleGenerate : function(event) {
+    handleAddsubpub: function(event) {
       var self = this;
       $('#modal-generate-spinner').show();
       self.$set('generate', false);
       self.$set('label', String("0").concat('%'));
       var formData = {
+        title : self.title,
+        description: self.description,
+        target: self.target,
       }
-      var url = document.location.protocol + '//' + document.location.host + '/' + formData.range;
-      self.$http.post("/-/generator", formData).then(function(result) {
-        $('#modal-generate').modal('toggle');
+      self.$http.post("/-/addsubpub", formData).then(function(result) {
+        $('#modal-addsubpub').modal('toggle');
         self.$set('generate', true);
         self.$set('label', "Generate");
-        self.$set('size', 0);
+        $('#modal-addsubpub-spinner').hide();
+        console.log('result', result)
       }, function(e) {
-        $('#modal-generate').modal('toggle');
+        $('#modal-addsubpub').modal('toggle');
         this.$set('generate', true);
-        $('#modal-generate-spinner').hide();
+        $('#modal-addsubpub-spinner').hide();
       });
     }
   }
