@@ -29,12 +29,10 @@ module.exports = function(router, core) {
     debug('debug', req.body);
     var opt = {
       query : {
-        typ: 'fake'
+        typ: 'form',
+        filename : Date.now().toString().concat('.new')
       },
-      body : {
-        filename : Date.now().toString().concat('.new'),
-        content : req.body
-      },
+      body : req.body,
       json : true
     };
     req.core.agent.post('/index', opt)
