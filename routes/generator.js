@@ -18,53 +18,29 @@ module.exports = function(router, core) {
   .route('/-/generator')
   .post(bodyParser.json()) // for this.$http.post (vue-resource)
   .post(bodyParser.urlencoded({ extended: true})) // for $.ajax (jquery)
-  /*
   .post(validate({
-        body : {
-         size:  Joi.string().regex(/[0-9]+/).required(),
-          range: Joi.string().regex(/[0-9]+/).required()
-        }
-      }))
-      */
+    body : {
+      size:  Joi.string().regex(/[0-9]+/).required(),
+      range: Joi.string().required()
+    }
+  }))
   .post(function(req, res, next) {
     debug('debug', req.body);
-    var range = req.body.range.toLocaleLowerCase();
-    var size = req.body.size;
-    var loaderOptions = {
-      "collectionName" : range,
-      "connexionURI" : req.config.get('connectionURI'),
-      "concurrency" : req.config.get('concurrency'),
-      "delay" : req.config.get('delay'),
-      "maxFileSize" : req.config.get('maxFileSize'),
-      "writeConcern" : req.config.get('writeConcern'),
-      "ignore" : req.config.get('filesToIgnore'),
-      "watch" : false
-    }
-    var documentURL = {
-      protocol: "http",
-      hostname: "127.0.0.1",
-      port: req.config.get('port'),
-      query: {
-        plain : size
-      }
-    }
-    var arkOptions = {
-      range: range,
-      naan: req.config.get('NAAN'),
-      size: size
-    }
-
-    process.env['HTTP_PROXY'] = null;
-    process.env['HTTPS_PROXY'] = null;
-    process.env['http_proxy'] = null;
-    process.env['https_proxy'] = null;
-
+    var subpub = req.body.range.toLocaleLowerCase();
     var  listname = shortid.generate();
-    documentURL.pathname = "/-/echo/" + listname + ".list";
-    var ldr;
-    ldr = new Loader(__dirname, loaderOptions);
-    ldr.use('**/*', require('../loaders/bundle.js')(arkOptions));
-    ldr.push(url.format(documentURL));
-    res.send(listname);
+    var opt = {
+      query : {
+        typ: 'form',
+        filename : String(listname).concat('.ark')
+      },
+      body : req.body,
+      json : true
+    };
+    req.core.agent.post('/' + subpub, opt)
+    .then(function(response) {
+      //console.log(response.body);
+      res.send(response.body);
+    })
+    .catch(next);
   })
 }

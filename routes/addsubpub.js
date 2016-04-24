@@ -30,7 +30,7 @@ module.exports = function(router, core) {
     var opt = {
       query : {
         typ: 'form',
-        filename : Date.now().toString().concat('.new')
+        filename : Date.now().toString().concat('.sp')
       },
       body : req.body,
       json : true

@@ -21,7 +21,11 @@ module.exports = {
   "loaders": [
     {
       "script": "subpub.js",
-      "pattern" : '**/*.new'
+      "pattern" : '**/*.sp'
+    },
+    {
+      "script": "subpub.js",
+      "pattern" : '**/*.ark'
     }
   ],
   "routes": [
