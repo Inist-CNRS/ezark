@@ -1,3 +1,4 @@
+/* global $,Vue */
 'use strict';
 var async = require('async');
 var heart = require('heartbeats').createHeart(100);
@@ -6,7 +7,7 @@ module.exports = new Vue({
   el: '#modal-generate',
   ready: function() {
     var self = this;
-    self.$http.get(window.location.protocol + '//' + window.location.host + '/data/*').then(function (response) {
+    self.$http.get(window.location.protocol + '//' + window.location.host + '/index/*').then(function (response) {
       self.$set('ranges', response.data);
     }, console.error);
   },
@@ -34,7 +35,7 @@ module.exports = new Vue({
           var qry = {
             "alt" : "raw",
             "$query" : {
-              "bundle" : result.data
+              "_content.json.bundle" : result.data.bundle
             }
           }
           self.$http.get(url + '/$count?' + mqs.stringify(qry, {})).then(function(response) {
@@ -42,22 +43,22 @@ module.exports = new Vue({
             if (formData.size <= response.data[0].value) {
               window.location.href = document.location.protocol + '//' + document.location.host + '/' + formData.range.toLocaleLowerCase() + '/*?' + mqs.stringify({
                 "$query" : {
-                  "bundle" : result.data
+                  "_content.json.bundle" : result.data.bundle
                 },
                 "$transform" : {
-                  "get" : "ark"
+                  "get" : "_content.json.ark"
                 },
                 "alt": "jbj"
               });
               heart.killEvent('spin');
-              $('#modal-generate').modal('toggle');
+              $('#modal-generate').modal('hide');
               self.$set('generate', true);
               self.$set('label', "Generate");
               self.$set('size', 0);
               $('#modal-generate-spinner').hide();
             }
           }, function(e) {
-            $('#modal-generate').modal('toggle');
+            $('#modal-generate').modal('hide');
             this.$set('generate', true);
             $('#modal-generate-spinner').hide();
           });

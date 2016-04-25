@@ -20,26 +20,29 @@ module.exports = function(router, core) {
   .post(bodyParser.urlencoded({ extended: true})) // for $.ajax (jquery)
   .post(validate({
     body : {
-      size:  Joi.string().regex(/[0-9]+/).required(),
+      size:  Joi.number().integer().required(),
       range: Joi.string().required()
     }
   }))
   .post(function(req, res, next) {
     debug('debug', req.body);
-    var subpub = req.body.range.toLocaleLowerCase();
-    var  listname = shortid.generate();
+    var body = {
+      naan : core.config.get('NAAN'),
+      subpub: req.body.range.toLocaleLowerCase(),
+      size: req.body.size,
+      bundle : shortid.generate()
+    }
     var opt = {
       query : {
         typ: 'form',
-        filename : String(listname).concat('.ark')
+        filename : String(body.bundle).concat('.ark')
       },
-      body : req.body,
+      body : body,
       json : true
     };
-    req.core.agent.post('/' + subpub, opt)
+    core.agent.post('/' + body.subpub, opt)
     .then(function(response) {
-      //console.log(response.body);
-      res.send(response.body);
+      res.send(body);
     })
     .catch(next);
   })

@@ -24,7 +24,7 @@ module.exports = {
       "pattern" : '**/*.sp'
     },
     {
-      "script": "subpub.js",
+      "script": "genark.js",
       "pattern" : '**/*.ark'
     }
   ],

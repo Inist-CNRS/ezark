@@ -2,33 +2,31 @@
 var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('castor:helpers:' + basename)
-    /*
-   , checkdigit = require('checkdigit')
-     */
   , pad = require('pad')
-  , farmhash = require('farmhash')
+  , alphabet = 'ybcdfghjklmnpqrstvwxz0123456789'
+  , basek = require('basek')
   ;
 
-function ARK(naan, range)
+basek.alphaSet(alphabet)
+
+var randomInt = function() {
+  return Math.floor(Math.random() * 9007199254740992);
+};
+
+function ARK(naan, subpub)
 {
   if (!(this instanceof ARK)) {
-    return new ARK(naan, range);
+    return new ARK(naan, subpub);
   }
   this.naan = String(pad(5, naan || 0, '0'));
-  this.range = String(pad(2, range || 0, '0'));
+  this.subpub = String(pad(2, subpub || 0, 'y'));
 }
 
 ARK.prototype = {
-  stringify: function(input, seed) {
-    var hash = farmhash.hash32WithSeed(input, Number(seed || 0))
-    debug(input, seed, hash);
-    hash = pad(10, hash, '0');
-    var id = this.range.concat('-').concat(hash);
-    /*
-    var vid = checkdigit.mod10.apply(id);
-    vid = pad(13, vid, '0')
-    */
-    return 'ark:/' + this.naan + '/' + id;
+  generate: function(seed) {
+    var nid = randomInt() + 1;
+    var id = basek.toBase(nid).pad(4).get();
+    return 'ark:/' + this.naan + '/' + this.subpub + '-' + id;
   },
   parse: function (str) {
     var seg = str.split('/');
@@ -42,16 +40,11 @@ ARK.prototype = {
     if (seg[1] !== this.naan) {
       throw new Error('Unknow NAAN');
     }
-    /*
-    if (checkdigit.mod10.isValid(seg[2]) === false) {
-      throw new Error('Corrompted identifier');
-    }
-    */
     return {
       value : str,
       name: seg[2],
-      range: seg[2].substring(0, 2),
-      hash: seg[2].substring( 2, -1),
+      subpub: seg[2].substring(0, 4),
+      identifier: seg[2].substring(4, -1),
       naan : seg[1]
     }
   }
