@@ -11,6 +11,7 @@ module.exports = {
     "heartbeats",
     "async",
     "vue",
+    "vue-validator",
     "vue-resource",
     "components/metrics",
     "components/modal-generate",

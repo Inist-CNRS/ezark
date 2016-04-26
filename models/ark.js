@@ -12,11 +12,19 @@ var path = require('path')
   model
   .declare('ark', function(req, fill) {
       var Errors = req.config.get('Errors');
-      var identifier = new ARK(req.config.get('NAAN'));
-      fill(identifier.parse('ark:/' + req.ark.naan + '/' + req.ark.name));
-  })
+      if (req.config.get('NAAN') != Number(req.ark.naan)) {
+        throw new Error('Unknow NAAN');
+      }
+      fill({
+        value : 'ark:/' + req.ark.naan + '/' + req.ark.name,
+        naan: req.ark.naan,
+        name: req.ark.name,
+        subpub: req.ark.name.substring(0, 4),
+        identifier: req.ark.name.substring(5)
+      })
+    })
   .prepend('collectionName', function(req, fill) {
-      fill(this.ark.range);
+      fill(this.ark.subpub);
   })
   .append('range', function(req, fill) {
       var q = {
@@ -33,7 +41,7 @@ var path = require('path')
   })
   .append('target', function(req, fill) {
       var q = {
-        ark: this.ark.value
+        _wid: this.ark.name
       };
       this.mongoDatabaseHandle.collection(this.collectionName).findOne(q).then(function(doc) {
           if (doc === null && req.routeParams.resourceName !== 'index') {
@@ -46,7 +54,7 @@ var path = require('path')
   })
   .send(function(res, next) {
     var self = this;
-    res.send(self.range._content.json.target + '/' + self.target.ark)
+    res.send(self.range._content.json.target + '/' + self.target._content.json.ark)
   })
 
   return model;

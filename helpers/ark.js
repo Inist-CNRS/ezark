@@ -43,26 +43,6 @@ ARK.prototype = {
     basek.alphaSet(alphabet)
     return 'ark:/' + this.naan + '/' + this.subpub + '-' + basek.toBase(id9).pad(4).get();
   },
-  parse: function (str) {
-    var seg = str.split('/');
-    debug(seg, this.naan);
-    if (seg.length != 3) {
-      throw new Error('Invalid identifier');
-    }
-    if (seg[0] !== 'ark:') {
-      throw new Error('Unknow identifier');
-    }
-    if (seg[1] !== this.naan) {
-      throw new Error('Unknow NAAN');
-    }
-    return {
-      value : str,
-      name: seg[2],
-      subpub: seg[2].substring(0, 4),
-      identifier: seg[2].substring(4, -1),
-      naan : seg[1]
-    }
-  }
 }
 
 

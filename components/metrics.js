@@ -1,3 +1,4 @@
+/* global $,Vue */
 'use strict';
 var async = require('async');
 module.exports = new Vue({
@@ -25,7 +26,7 @@ module.exports = new Vue({
       });
 
       async.map(ranges.map(function(item) {
-        return item['_id'] + '/$distinct?field=bundle';
+        return item['_id'] + '/$distinct?field=_content.json.bundle';
       }), function(url, callback) {
         self.$http.get(url).then(function (response) {
           callback(null, Number(response.data.length));
