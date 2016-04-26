@@ -7,7 +7,7 @@ module.exports = new Vue({
   el: '#modal-generate',
   ready: function() {
     var self = this;
-    self.$http.get(window.location.protocol + '//' + window.location.host + '/index/*').then(function (response) {
+    self.$http.get(window.location.protocol + '//' + window.location.host + '/index/*?alt=jsonld').then(function (response) {
       self.$set('ranges', response.data);
     }, console.error);
   },

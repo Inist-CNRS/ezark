@@ -58,18 +58,21 @@ module.exports = {
     }
   },
   "indexColumns" : {
-    "range" : {
+    "subpub" : {
       "label" : "Sub publisher prefix",
       "scheme" : "http://purl.org/dc/elements/1.1/identifier",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "get" : "_content.json.range",
-      "downcase": true
+      "get" : "_wid"
     },
     "title" : {
       "label" : "Title",
       "scheme" : "http://purl.org/dc/elements/1.1/title",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "get" : "_content.json.title"
+      "get" : [
+        "_content.json.name",
+        "_content.json.subject"
+      ],
+      "join" : "/"
     },
     "description" : {
       "label" : "Description",

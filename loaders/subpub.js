@@ -1,9 +1,10 @@
 'use strict';
 
-var alphabet = 'ybcdfghjklmnpqrstvwxz';
-var basek = require('basek');
+var basek = require('basek')
+  , URL = require('url')
+;
+var alphabet = '0123456789bcdfghjklmnpqrstvwxz';
 
-basek.alphaSet(alphabet)
 
 // Random integer between min (inclusive) and max (exclusive)
 var randomInt = function(min, max) {
@@ -13,8 +14,15 @@ var randomInt = function(min, max) {
 module.exports = function(options) {
   options = options || {};
   return function (input, submit) {
-    var nid = randomInt(0, alphabet.length * alphabet.length * alphabet.length * alphabet.length) + 1
+    var loc = URL.parse(input.location, true)
+    var id0 = alphabet.length * alphabet.length * alphabet.length * alphabet.length
+    var nid = randomInt(0, id0);
+    basek.alphaSet(alphabet)
     input._wid = basek.toBase(nid).pad(4).get();
+    input._content = {
+      json : loc.query
+    }
+
     submit(null, input);
   }
 }

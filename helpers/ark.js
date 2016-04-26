@@ -3,15 +3,21 @@ var path = require('path')
   , basename = path.basename(__filename, '.js')
   , debug = require('debug')('castor:helpers:' + basename)
   , pad = require('pad')
-  , alphabet = 'ybcdfghjklmnpqrstvwxz0123456789'
+  , alphabet = '0123456789bcdfghjklmnpqrstvwxz'
   , basek = require('basek')
   ;
 
-basek.alphaSet(alphabet)
 
-var randomInt = function() {
-  return Math.floor(Math.random() * 9007199254740992);
+
+// Random integer between min (inclusive) and max (exclusive)
+var randomInt = function(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
 };
+//                   id1                                           id0
+// 0 ------------------------  1451606400 ------------------ 456580468 ------------------------------- 9007199254740992
+// 0  ------------ 4974068
+// 0 ---- 32323 --
+
 
 function ARK(naan, subpub)
 {
@@ -24,9 +30,18 @@ function ARK(naan, subpub)
 
 ARK.prototype = {
   generate: function(seed) {
-    var nid = randomInt() + 1;
-    var id = basek.toBase(nid).pad(4).get();
-    return 'ark:/' + this.naan + '/' + this.subpub + '-' + id;
+    var id0 = Date.now();
+    var id1 = id0 - 1451606400;
+    var id2 = randomInt(0, id1);
+    var id3 = randomInt(id1, id0);
+    var id4 = id3 - id2;
+    var id5 = id4 < 0 ? id4 * -1 : id4;
+    var id6 = randomInt(0, id5);
+    var id7 = id5 - id6;
+    var id8 =  id7 < 0 ? id7 * -1 : id7;
+    var id9 = randomInt(0, id8);
+    basek.alphaSet(alphabet)
+    return 'ark:/' + this.naan + '/' + this.subpub + '-' + basek.toBase(id9).pad(4).get();
   },
   parse: function (str) {
     var seg = str.split('/');

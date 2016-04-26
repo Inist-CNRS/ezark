@@ -1,3 +1,4 @@
+/* global $,Vue */
 'use strict';
 var mqs = require('mongodb-querystring');
 module.exports = new Vue({
@@ -7,7 +8,8 @@ module.exports = new Vue({
     console.log('ready', self.label, self.description)
   },
   data: {
-    title: "",
+    name: "",
+    subject : "",
     description: "",
     target: "",
     label: "Generate",
@@ -20,7 +22,8 @@ module.exports = new Vue({
       self.$set('generate', false);
       self.$set('label', String("0").concat('%'));
       var formData = {
-        title : self.title,
+        name : self.name,
+        subject : self.subject,
         description: self.description,
         target: self.target,
       }
@@ -29,7 +32,7 @@ module.exports = new Vue({
         self.$set('generate', true);
         self.$set('label', "Generate");
         $('#modal-addsubpub-spinner').hide();
-        console.log('result', result)
+        window.location = '/';
       }, function(e) {
         $('#modal-addsubpub').modal('toggle');
         this.$set('generate', true);

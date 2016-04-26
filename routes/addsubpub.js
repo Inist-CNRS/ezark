@@ -20,8 +20,7 @@ module.exports = function(router, core) {
   .post(bodyParser.urlencoded({ extended: true})) // for $.ajax (jquery)
  .post(validate({
    body : {
-     title:  Joi.string().required(),
-     description:  Joi.string().required(),
+     name:  Joi.string().required(),
      target: Joi.string().required()
    }
  }))
