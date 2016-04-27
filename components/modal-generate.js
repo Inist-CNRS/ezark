@@ -44,6 +44,11 @@ module.exports = new Vue({
           self.$http.get(url + '/$count?' + mqs.stringify(qry, {})).then(function(response) {
             self.$set('label', String(Math.round((Number(response.data[0].value) * 100)/formData.size)).concat('%'));
             if (formData.size <= response.data[0].value) {
+              $('#modal-generate').modal('hide');
+              self.$set('generate', true);
+              self.$set('label', "Generate");
+              self.$set('size', 0);
+              $('#modal-generate-spinner').hide();
               window.location.href = document.location.protocol + '//' + document.location.host + '/' + formData.range.toLocaleLowerCase() + '/*?' + mqs.stringify({
                 "$query" : {
                   "_content.json.bundle" : result.data.bundle
@@ -54,13 +59,9 @@ module.exports = new Vue({
                 "alt": "jbj"
               });
               heart.killEvent('spin');
-              $('#modal-generate').modal('hide');
-              self.$set('generate', true);
-              self.$set('label', "Generate");
-              self.$set('size', 0);
-              $('#modal-generate-spinner').hide();
-            }
+             }
           }, function(e) {
+            console.log(e);
             $('#modal-generate').modal('hide');
             this.$set('generate', true);
             $('#modal-generate-spinner').hide();
