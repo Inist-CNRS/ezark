@@ -3,10 +3,6 @@
 var mqs = require('mongodb-querystring');
 module.exports = new Vue({
   el: '#modal-addsubpub',
-  ready: function() {
-    var self = this;
-    console.log('ready', self.label, self.description)
-  },
   data: {
     name: "",
     subject : "",

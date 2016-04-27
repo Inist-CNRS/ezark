@@ -32,15 +32,13 @@
     "mongodb-querystring": "^1.0.3",
     "pad": "^1.0.0",
     "paperclip": "^3.0.18",
+    "qs": "^6.1.0",
     "serial-loop": "https://github.com/touv/serial-loop",
     "shortid": "^2.2.2",
     "to-slug": "https://github.com/touv/to-slug",
     "to-slug-case": "https://github.com/ianstormtaylor/to-slug-case",
     "vue": "^1.0.18",
-    "vue-html-loader": "^1.2.0",
-    "vue-loader": "^8.2.1",
     "vue-resource": "^0.7.0",
-    "vue-style-loader": "^1.0.0",
     "vue-validator": "^2.0.2"
   },
   "devDependencies": {

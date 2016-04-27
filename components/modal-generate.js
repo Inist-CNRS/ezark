@@ -22,6 +22,9 @@ module.exports = new Vue({
   methods : {
     handleGenerate : function(event) {
       var self = this;
+      if (self.generate === false) {
+        return false;
+      }
       $('#modal-generate-spinner').show();
       self.$set('generate', false);
       self.$set('label', String("0").concat('%'));
