@@ -1,8 +1,9 @@
 # ezark
 
-A quick application starter boilerplate based on castor-core.
+ezark provide a central register for your sub publishers. 
 
-Replace "ezark" by your name in all files to start a new project ...
+![anim](https://cloud.githubusercontent.com/assets/15609/15011755/d17968aa-11f3-11e6-8c5b-452a25a82828.gif)
+
 
 [![Build Status](https://travis-ci.org/Inist-CNRS/ezark.svg?branch=master)](https://travis-ci.org/Inist-CNRS/ezark)
 [![Dependencies Status](https://david-dm.org/Inist-CNRS/ezark.png)](https://david-dm.org/Inist-CNRS/ezark)
