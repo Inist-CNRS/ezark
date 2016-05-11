@@ -7,7 +7,6 @@
     "ezark": "./ezark"
   },
   "scripts": {
-    "test": "mocha",
     "start": "./ezark"
   },
   "keywords": [],

@@ -1,5 +1,5 @@
 NODE_VERSION=4.4.0
-.PHONY: help install npm clean test coverage lint docker-build docker-run-debug docker-run-prod docker-stop-prod run-prod run-debug docker-chown
+.PHONY: help install npm clean coverage lint docker-build docker-run-debug docker-run-prod docker-stop-prod run-prod run-debug docker-chown
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -45,15 +45,12 @@ npm: ## npm wrapper. example: make npm install --save mongodb-querystring
 	@docker run -it --rm -v $$(pwd):/app -w /app --net=host -e NODE_ENV -e http_proxy -e https_proxy node:${NODE_VERSION} npm $(filter-out $@,$(MAKECMDGOALS))
 	@make docker-chown
 
-test: ## run ezark unit tests
-	@npm test
-
 coverage: ## run istanbul to have how much % of the ezark code is covered by tests
 	@./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -R spec
 
 #lint": "jshint --exclude-path node_modes */**/*.js",
 lint: ## to check the coding rules
-	@./node_modules/.bin/eslint *.js heartbeats/ helpers/ loaders/ test/ views/assets/
+	@./node_modules/.bin/eslint *.js heartbeats/ helpers/ loaders/ views/assets/
 
 clean: ## remove node_modules and temp files
 	@rm -Rf ./node_modules/ ./npm-debug.log

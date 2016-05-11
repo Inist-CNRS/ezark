@@ -7,12 +7,7 @@ FROM node:4.4.0
 COPY . /app
 WORKDIR /app
 
-# Run the test to make sure 
-# the docker image will be ok.
-# If the test fails, the image 
-# will not be built
 RUN npm install && \
-    npm test && \
     # Then just install 
     # production node modules
     rm -rf ./node_modules && \
