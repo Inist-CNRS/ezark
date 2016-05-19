@@ -21,7 +21,7 @@
     "anglicize": "https://github.com/azer/anglicize",
     "basek": "^1.0.5",
     "body-parser": "^1.14.1",
-    "castor-core": "^4.0.0",
+    "castor-core": "^4.2.0",
     "castor-load": "^4.4.3",
     "clone": "^1.0.2",
     "datamodel": "^1.5.0",
