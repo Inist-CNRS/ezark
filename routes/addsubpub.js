@@ -27,17 +27,17 @@ module.exports = function(router, core) {
   .post(function(req, res, next) {
     debug('debug', req.body);
     var opt = {
+      internal: true,
       query : {
         typ: 'form',
         filename : Date.now().toString().concat('.sp')
       },
-      body : req.body,
-      json : true
+      body : req.body
     };
     req.core.agent.post('/index', opt)
     .then(function(response) {
-      //console.log(response.body);
-      res.send(response.body);
+      res.set(response.headers);
+      res.sendStatus(201);
     })
     .catch(next);
   })
