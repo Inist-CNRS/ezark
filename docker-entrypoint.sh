@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ "$(cat /app/data.json)" == "{}" ]; then
-	cp -f /app/config.local.json /app/data.json
+if [ "$(cat /app/config.local.json)" == "{}" ]; then
+	cp -f /app/config.sample.json /app/config.local.json
 fi
 
 exec /app/ezark 
