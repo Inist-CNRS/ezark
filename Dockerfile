@@ -19,7 +19,7 @@ RUN rm -rf ./node_modules && \
 VOLUME /app/data
 
 RUN mkdir -p /opt/ezmaster/config/
-RUN ln -s /app/data.json /opt/ezmaster/config/config.json
+RUN ln -s /app/config.local.json /opt/ezmaster/config/config.json
 RUN ln -s /app/data /opt/ezmaster/data
 
 # run the application
