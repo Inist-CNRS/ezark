@@ -18,7 +18,7 @@ module.exports = function(options) {
     var id0 = alphabet.length * alphabet.length * alphabet.length
     var nid = randomInt(0, id0);
     basek.alphaSet(alphabet)
-    input._wid = basek.toBase(nid).pad(3).get();
+    input._wid = basek.toBase(nid).pad(3).get().toUpperCase();
     input._content = {
       json : loc.query
     }
