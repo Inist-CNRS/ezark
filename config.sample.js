@@ -1,3 +1,1 @@
-module.exports = {
-  "NAAN" : "000000"
-}
+module.exports = require('./config.sample.json');

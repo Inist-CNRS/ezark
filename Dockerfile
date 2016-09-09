@@ -2,21 +2,26 @@
 FROM node:argon
 
 # Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
-
-# Install app dependencies
-COPY package.json /usr/src/app/
-RUN npm install && \
-	npm cache clean
+RUN mkdir -p /app
+WORKDIR /app
 
 # Bundle app source
-COPY . /usr/src/app
+COPY . /app
+
+# Install app dependencies
+RUN rm -rf ./node_modules && \
+    npm install --production && \
+    npm cache clean
+
 
 # data folder is a volume because it will
 # contains the user's data files (ex: CSV)
-VOLUME /usr/src/app/data
+VOLUME /app/data
+
+RUN mkdir -p /opt/ezmaster/config/
+RUN ln -s /app/data.json /opt/ezmaster/config/config.json
+RUN ln -s /app/data /opt/ezmaster/data
 
 # run the application
-CMD ["npm", "start"]
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
 EXPOSE 3000
