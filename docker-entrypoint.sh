@@ -4,4 +4,4 @@ if [ "$(cat /app/data.json)" == "{}" ]; then
 	cp -f /app/config.sample.json /app/data.json
 fi
 
-exec /app/ezark /app
+exec /app/ezark /app/data
