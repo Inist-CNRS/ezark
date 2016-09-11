@@ -1,88 +1,119 @@
 'use strict'
 
 module.exports = {
-  "browserifyModules" : [
-    "mongodb-querystring",
-    "heartbeats",
-    "async",
-    "vue",
-    "vue-validator",
-    "vue-resource",
-    "components/metrics",
-    "components/modal-generate",
-    "components/modal-addsubpub",
-    "components/form-resolve",
+ "rootURL" : "index.html",
+  "mimeTypes" : {
+    "application/json" : [
+      'json',
+      'jsonld',
+      'raw',
+      'dry',
+      'min'
+    ]
+  },
+  "acceptFileTypes": [
+    'csv',
+    'xml',
+    'txt',
+    'xls',
+    'xlsx',
+    'json'
   ],
-  "rootURL" : "index.html",
+  "allowedAltValues" : [
+    'dry',
+    'min',
+    'csv',
+    'xls',
+    'tsv',
+    'raw'
+  ],
   "loaders": [
     {
-      "script": "subpub.js",
+      "require": "subpub.js",
       "pattern" : '**/*.sp'
     },
     {
-      "script": "genark.js",
+      "require": "genark.js",
       "pattern" : '**/*.ark'
     }
   ],
+  "downloaders": [
+    {
+      "pattern" : "+(xls|xlsx)",
+      "require" : "excel.js"
+    }
+  ],
   "routes": [
+    "config.js",
     "echo.js",
     "status.js",
-    "generator.js",
     "resolver.js",
-    "addsubpub.js",
     "rest-crud.js"
   ],
-  "defaultColumns": {
+  "collectionFields": {
     "ark": {
-      "label" : "Archive Resource Key",
+      "title" : "Archive Resource Key",
       "scheme" : "http://purl.org/dc/terms/URI",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "get": "ark"
+      "content<" : {
+        "get": "ark"
+      }
     },
     "range": {
-      "label" : "Sub publisher prefix",
+      "title" : "Sub publisher prefix",
       "scheme" : "http://purl.org/dc/terms/isPartOf",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "get": "_table._wid",
-      "downcase": true
+      "content<" : {
+        "get": "_table._wid",
+        "downcase": true
+      }
     },
     "batchID": {
-      "label" : "Batch ID",
+      "title" : "Batch ID",
       "scheme" : "http://purl.org/dc/elements/1.1/source",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "get": "bundle"
+      "content<" : {
+        "get": "bundle"
+      }
     }
   },
-  "indexColumns" : {
+  "datasetFields" : {
     "subpub" : {
-      "label" : "Sub publisher prefix",
+      "title" : "Sub publisher prefix",
       "scheme" : "http://purl.org/dc/elements/1.1/identifier",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "get" : "_wid"
+      "content<" : {
+        "get" : "_wid"
+      }
     },
     "title" : {
-      "label" : "Title",
+      "title" : "Title",
       "scheme" : "http://purl.org/dc/elements/1.1/title",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "get" : [
-        "_content.json.name",
-        "_content.json.subject"
-      ],
-      "join" : "/"
+      "content<" : {
+        "get" : [
+          "_content.json.name",
+          "_content.json.subject"
+        ],
+        "join" : "/"
+      }
     },
     "description" : {
-      "label" : "Description",
+      "title" : "Description",
       "scheme" : "http://purl.org/dc/terms/description",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
-      "get" : "_content.json.description"
+      "content<" : {
+        "get" : "_content.json.description"
+      }
     },
     "target" : {
-      "label" : "Application URL",
+      "title" : "Application URL",
       "scheme" : "http://purl.org/dc/terms/provenance",
       "type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
-      "get" : "_content.json.target"
+      "content<" : {
+        "get" : "_content.json.target"
+      }
     }
-  },
-  'allowedAltValues':     ['csv', 'jsonld', 'jbj', 'xls', 'tsv', 'dry', 'raw']
+  }
 };
 module.exports.package = require('./package.json');

@@ -5,6 +5,7 @@ var path = require('path')
   , clone = require('clone')
   , loop = require('serial-loop')
   , URL = require('url')
+  , MQS = require('mongodb-querystring')
   , ARK = require('../helpers/ark.js')
   ;
 
@@ -17,17 +18,18 @@ module.exports = function(options, config) {
     var concurrency = cf.concurrency || 1
       , delay       = cf.delay || 100
       , loc         = URL.parse(input.location, true)
-      , bundle      = loc.query.bundle
-      , size        = Number(loc.query.size)
-      , subpub      = loc.query.subpub || ''
-      , naan        = loc.query.naan || ''
+      , params      = MQS.parse(loc.search.slice(1))
+      , bundle      = params.bundle
+      , size        = Number(params.size)
+      , subpub      = params.subpub || ''
+      , naan        = params.naan || ''
       , ark         = new ARK(naan, subpub)
       ;
     debug('size', size);
     debug('subpub', subpub);
     debug('naan', naan);
-    debug('loc', loc);
-    if (Number.isNaN(options.size) || options.size < 1) {
+    debug('params', params);
+    if (Number.isNaN(size) || size < 1) {
       return submit(new Error('Size is not valid'), null);
     }
     if (subpub === '') {

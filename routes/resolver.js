@@ -29,7 +29,7 @@ module.exports = function(router, core) {
   router
   .route('/ark:/:naan/:name')
   .get(function(req, res, next) {
-      if (req.ark.name === undefined || req.ark.naan === undefined) {
+      if (req.ark.name === undefined || req.ark.naan === undefined) {
         return next();
       }
       datamodel([core.models.mongo, ark])

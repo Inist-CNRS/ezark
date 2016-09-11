@@ -1,10 +1,16 @@
 /* global $,Vue */
 'use strict';
 var async = require('async');
+var Vue = require('vue');
 module.exports = new Vue({
   el: '#metrics',
   ready: function() {
     var self = this;
+    self.$http.get(window.location.protocol + '//' + window.location.host + '/-/config.json').then(function (response) {
+      self.$set('naan', response.data.NAAN);
+    }, console.error);
+
+
     self.$http.get(window.location.protocol + '//' + window.location.host + '/index/*').then(function (response) {
       var ranges = response.data
       this.$set('countRanges', ranges.length);
@@ -42,7 +48,8 @@ module.exports = new Vue({
   data: {
     countRanges: 0,
     countIdentifiers: 0,
-    countBundles: 0
+    countBundles: 0,
+    naan :''
   }
 })
 

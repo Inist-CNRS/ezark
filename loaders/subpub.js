@@ -22,7 +22,6 @@ module.exports = function(options) {
     input._content = {
       json : loc.query
     }
-
     submit(null, input);
   }
 }
