@@ -25,7 +25,7 @@ function ARK(naan, subpub)
     return new ARK(naan, subpub);
   }
   this.naan = String(pad(5, naan || 0, '0'));
-  this.subpub = String(pad(2, subpub || 0, 'y'));
+  this.subpub = String(pad(2, subpub || 0, 'y')).toUpperCase();
 }
 
 ARK.prototype = {
@@ -41,7 +41,7 @@ ARK.prototype = {
     var id8 =  id7 < 0 ? id7 * -1 : id7;
     var id9 = randomInt(0, id8);
     basek.alphaSet(alphabet)
-    return 'ark:/' + this.naan + '/' + this.subpub + '-' + basek.toBase(id9).pad(4).get();
+    return 'ark:/' + this.naan + '/' + this.subpub + '-' + basek.toBase(id9).pad(4).get().toUpperCase();
   },
 }
 

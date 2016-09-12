@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = {
- "rootURL" : "index.html",
+  "rootURL" : "index.html",
   "mimeTypes" : {
     "application/json" : [
       'json',
