@@ -50,6 +50,11 @@ module.exports = {
     "resolver.js",
     "rest-crud.js"
   ],
+  "uniqueValueWith" :  {
+    "get": ["_content.json.name", "_content.json.name"],
+    "join" : "/",
+    "default" : "n/a"
+  },
   "collectionFields": {
     "ark": {
       "title" : "Archive Resource Key",
