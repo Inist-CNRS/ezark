@@ -28,7 +28,8 @@ module.exports = new Vue({
         var serverHost = window.location.protocol + '//' + window.location.host;
         var url = serverHost + '/index/';
         var formData = {
-          'url' : serverHost + '/-/echo/' + Date.now().toString().concat('.sp') + '?' + MQS.stringify(queryData)
+          // BUG? : see https://trello.com/c/A0oNBnRq
+          'url' : 'http://127.0.0.1:3000/-/echo/' + Date.now().toString().concat('.sp') + '?' + MQS.stringify(queryData)
         }
         self.$http.post(url, formData).then(function (result) {
             $('#modal-addsubpub').modal('toggle');

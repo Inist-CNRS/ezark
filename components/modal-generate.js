@@ -45,7 +45,8 @@ module.exports = new Vue({
       var serverHost = window.location.protocol + '//' + window.location.host;
       var url = serverHost + '/' + self.range + '/';
       var formData = {
-        'url' : serverHost + '/-/echo/' + queryData.bundle.concat('.ark') + '?' + mqs.stringify(queryData)
+        // BUG? : see https://trello.com/c/A0oNBnRq
+        'url' : 'http://127.0.0.1:3000/-/echo/' + queryData.bundle.concat('.ark') + '?' + mqs.stringify(queryData)
       }
       console.log(url, formData);
       self.$http.post(url, formData).then(function(result) {
