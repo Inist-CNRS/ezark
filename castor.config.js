@@ -37,12 +37,6 @@ module.exports = {
       "pattern" : '**/*.ark'
     }
   ],
-  "downloaders": [
-    {
-      "pattern" : "+(xls|xlsx)",
-      "require" : "excel.js"
-    }
-  ],
   "routes": [
     "config.js",
     "echo.js",
@@ -51,7 +45,7 @@ module.exports = {
     "rest-crud.js"
   ],
   "uniqueValueWith" :  {
-    "get": ["_content.json.name", "_content.json.name"],
+    "get": ["_content.json.name", "_content.json.subject"],
     "join" : "/",
     "default" : "n/a"
   },

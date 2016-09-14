@@ -48,13 +48,12 @@ module.exports = new Vue({
         // BUG? : see https://trello.com/c/A0oNBnRq
         'url' : 'http://127.0.0.1:3000/-/echo/' + queryData.bundle.concat('.ark') + '?' + mqs.stringify(queryData)
       }
-      console.log(url, formData);
       self.$http.post(url, formData).then(function(result) {
         $('#modal-generate').modal('toggle');
         self.$set('generate', true);
         self.$set('label', "Generate");
         $('#modal-generate-spinner').hide();
-        window.location.href = serverHost + result.headers('location');
+        window.location.href = serverHost + result.headers('location') + '&alt=tsv';
       }, console.error);
     }
   }

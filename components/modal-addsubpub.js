@@ -36,7 +36,7 @@ module.exports = new Vue({
             self.$set('generate', true);
             self.$set('label', "Generate");
             $('#modal-addsubpub-spinner').hide();
-            window.location.href = serverHost + result.headers('location');
+            document.location.reload();
           }, function(e) {
             $('#modal-addsubpub').modal('toggle');
             this.$set('generate', true);
