@@ -55,7 +55,7 @@ module.exports = {
       "scheme" : "http://purl.org/dc/terms/URI",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "content<" : {
-        "get": "ark"
+        "get": "_content.json.ark"
       }
     },
     "range": {
@@ -63,8 +63,7 @@ module.exports = {
       "scheme" : "http://purl.org/dc/terms/isPartOf",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "content<" : {
-        "get": "_table._wid",
-        "downcase": true
+        "get": "_index._wid"
       }
     },
     "batchID": {
@@ -72,7 +71,7 @@ module.exports = {
       "scheme" : "http://purl.org/dc/elements/1.1/source",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "content<" : {
-        "get": "bundle"
+        "get": "_content.json.bundle"
       }
     }
   },
