@@ -7,8 +7,10 @@
     "ezark": "./ezark"
   },
   "scripts": {
+    "build": "browserify -d components/main.js -o public/libs.js && echo $?",
     "start": "./ezark",
-    "prestart": "browserify -d components/main.js -o public/libs.js && echo $?"
+    "prestart": "npm run build",
+    "preversion": "npm run build && git add public/libs.js"
   },
   "keywords": [],
   "contributors": [

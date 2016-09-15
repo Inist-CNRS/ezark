@@ -11,7 +11,7 @@ module.exports = function(model) {
   .declare('ark', function(req, fill) {
     // var Errors = req.config.get('Errors');
     if (req.config.get('NAAN') != Number(req.ark.naan)) {
-      throw new Error('Unknow NAAN');
+      throw new Error('Unknown NAAN');
     }
     fill({
       value : 'ark:/' + req.ark.naan + '/' + req.ark.name,
