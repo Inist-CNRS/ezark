@@ -49,21 +49,22 @@ module.exports = {
     "join" : "/",
     "default" : "n/a"
   },
-  "collectionFields": {
+  "documentFields": {
     "ark": {
       "title" : "Archive Resource Key",
-      "scheme" : "http://purl.org/dc/terms/URI",
+      "scheme" : "http://purl.org/dc/elements/1.1/identifier",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "content<" : {
         "get": "_content.json.ark"
       }
     },
-    "range": {
-      "title" : "Sub publisher prefix",
-      "scheme" : "http://purl.org/dc/terms/isPartOf",
-      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+    "url": {
+      "title" : "Resource URL",
+      "scheme" : "http://purl.org/dc/terms/URI",
+      "type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
       "content<" : {
-        "get": "_index._wid"
+        "get" : ["_collection._content.json.target", "_content.json.ark"],
+        "join": "/"
       }
     },
     "batchID": {
@@ -75,13 +76,13 @@ module.exports = {
       }
     }
   },
-  "datasetFields" : {
+  "collectionFields" : {
     "subpub" : {
       "title" : "Sub publisher prefix",
-      "scheme" : "http://purl.org/dc/elements/1.1/identifier",
+      "scheme" : "http://purl.org/dc/terms/isPartOf",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "content<" : {
-        "get" : "_wid"
+        "get" : "_collection._wid"
       }
     },
     "title" : {
@@ -90,8 +91,8 @@ module.exports = {
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "content<" : {
         "get" : [
-          "_content.json.name",
-          "_content.json.subject"
+          "_collection._content.json.name",
+          "_collection._content.json.subject"
         ],
         "join" : "/"
       }
@@ -101,7 +102,7 @@ module.exports = {
       "scheme" : "http://purl.org/dc/terms/description",
       "type": "https://www.w3.org/TR/xmlschema-2/#string",
       "content<" : {
-        "get" : "_content.json.description"
+        "get" : "_collection._content.json.description"
       }
     },
     "target" : {
@@ -109,9 +110,20 @@ module.exports = {
       "scheme" : "http://purl.org/dc/terms/provenance",
       "type": "https://www.w3.org/TR/xmlschema-2/#anyURI",
       "content<" : {
-        "get" : "_content.json.target"
+        "get" : "_collection._content.json.target"
+      }
+    }
+  },
+  "datasetFields" : {
+    "naan" : {
+      "title" : "Publisher prefix",
+      "scheme" : "http://purl.org/dc/elements/1.1/identifier",
+      "type": "https://www.w3.org/TR/xmlschema-2/#string",
+      "content<" : {
+        "get" : "_config.NAAN"
       }
     }
   }
+
 };
 module.exports.package = require('./package.json');
