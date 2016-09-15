@@ -5,13 +5,10 @@ FROM node:argon
 RUN mkdir -p /app
 WORKDIR /app
 
-# Bundle app source
+# npm dependencies before addinq source code
+COPY ./package.json /app
+RUN npm install --production -q && npm cache clean
 COPY . /app
-
-# Install app dependencies
-RUN rm -rf ./node_modules && \
-    npm install --production && \
-    npm cache clean
 
 # ezmasterization of ezark
 # see https://github.com/Inist-CNRS/ezmaster
