@@ -14,6 +14,5 @@ module.exports = function(options, core) {
   // at each beat
   return function (heartbeat, last) {
     debug('on the beat');
-  }
-}
-
+  };
+};

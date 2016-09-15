@@ -1,7 +1,7 @@
-/* global $,Vue */
+/* global $ */
 'use strict';
-var async = require('async');
-var heart = require('heartbeats').createHeart(100);
+// var async = require('async');
+// var heart = require('heartbeats').createHeart(100);
 var mqs = require('mongodb-querystring');
 var shortid = require('shortid')
 var Vue = require('vue');

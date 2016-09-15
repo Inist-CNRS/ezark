@@ -12,7 +12,7 @@ var path = require('path')
 
 module.exports = function(options, config) {
   options = options || {};
-  var identfifer = new ARK(options.naan, String(options.range).toLocaleLowerCase());
+  var identifier = new ARK(options.naan, String(options.range).toLocaleLowerCase());
 
   return function (input, submit, cf) {
     var concurrency = cf.concurrency || 1
@@ -47,16 +47,16 @@ module.exports = function(options, config) {
           bundle : bundle,
           ark: idt
         }
-      }
+      };
       var qe = submit(doc);
       if (qe.length() >= concurrency) {
         setTimeout(function () {
           next();
-        }, delay)
+        }, delay);
       }
       else {
         next();
       }
     }, submit);
-  }
-}
+  };
+};

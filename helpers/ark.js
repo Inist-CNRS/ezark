@@ -40,10 +40,11 @@ ARK.prototype = {
     var id7 = id5 - id6;
     var id8 =  id7 < 0 ? id7 * -1 : id7;
     var id9 = randomInt(0, id8);
-    basek.alphaSet(alphabet)
-    return 'ark:/' + this.naan + '/' + this.subpub + '-' + basek.toBase(id9).pad(4).get().toUpperCase();
-  },
-}
+    basek.alphaSet(alphabet);
+    return 'ark:/' + this.naan + '/' + this.subpub + '-' +
+           basek.toBase(id9).pad(4).get().toUpperCase();
+  }
+};
 
 
 module.exports = ARK;

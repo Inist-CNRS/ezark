@@ -50,7 +50,7 @@ coverage: ## run istanbul to have how much % of the ezark code is covered by tes
 
 #lint": "jshint --exclude-path node_modes */**/*.js",
 lint: ## to check the coding rules
-	@./node_modules/.bin/eslint *.js heartbeats/ helpers/ loaders/ views/assets/
+	@./node_modules/.bin/eslint *.js heartbeats/ helpers/ loaders/ models/ views/assets/ components/
 
 clean: ## remove node_modules and temp files
 	@rm -Rf ./node_modules/ ./npm-debug.log

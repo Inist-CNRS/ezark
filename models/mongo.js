@@ -1,4 +1,3 @@
-/*jshint node:true, laxcomma:true */
 'use strict';
 
 var path = require('path')
@@ -7,18 +6,16 @@ var path = require('path')
   , MongoClient = require('mongodb').MongoClient
   ;
 
-
 module.exports = function(model) {
   model
   .declare('mongoDatabaseHandle', function(req, fill) {
-      MongoClient.connect(req.config.get('connexionURI')).then(fill).catch(fill);
+    MongoClient.connect(req.config.get('connexionURI')).then(fill).catch(fill);
   })
   .complete('mongoDatabaseHandle', function(req, fill) {
-      if (this.mongoDatabaseHandle instanceof Error || this.mongoCursor !== undefined) {
-        return fill(this.mongoDatabaseHandle);
-      }
-      this.mongoDatabaseHandle.close().then(fill).catch(fill);
-  })
+    if (this.mongoDatabaseHandle instanceof Error || this.mongoCursor !== undefined) {
+      return fill(this.mongoDatabaseHandle);
+    }
+    this.mongoDatabaseHandle.close().then(fill).catch(fill);
+  });
   return model;
-}
-
+};

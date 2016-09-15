@@ -7,8 +7,10 @@
     "ezark": "./ezark"
   },
   "scripts": {
+    "build": "browserify -d components/main.js -o public/libs.js && echo $?",
     "start": "./ezark",
-    "prestart": "browserify -d components/main.js -o public/libs.js && echo $?"
+    "prestart": "npm run build",
+    "preversion": "npm run build && git add public/libs.js"
   },
   "keywords": [],
   "contributors": [
@@ -45,7 +47,7 @@
   "devDependencies": {
     "browserify": "^13.1.0",
     "chai": "^3.5.0",
-    "eslint": "^2.3.0",
+    "eslint": "^3.5.0",
     "istanbul": "^0.4.2",
     "jshint": "^2.9.1",
     "mocha": "^2.4.5",

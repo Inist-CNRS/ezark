@@ -1,9 +1,9 @@
-'use strict'
+'use strict';
 
 module.exports = {
-  "rootURL" : "index.html",
-  "mimeTypes" : {
-    "application/json" : [
+  'rootURL' : 'index.html',
+  'mimeTypes' : {
+    'application/json' : [
       'json',
       'jsonld',
       'raw',
@@ -11,7 +11,7 @@ module.exports = {
       'min'
     ]
   },
-  "acceptFileTypes": [
+  'acceptFileTypes': [
     'csv',
     'xml',
     'txt',
@@ -19,7 +19,7 @@ module.exports = {
     'xlsx',
     'json'
   ],
-  "allowedAltValues" : [
+  'allowedAltValues' : [
     'dry',
     'min',
     'csv',
@@ -27,27 +27,27 @@ module.exports = {
     'tsv',
     'raw'
   ],
-  "loaders": [
+  'loaders': [
     {
-      "require": "subpub.js",
-      "pattern" : '**/*.sp'
+      'require': 'subpub.js',
+      'pattern' : '**/*.sp'
     },
     {
-      "require": "genark.js",
-      "pattern" : '**/*.ark'
+      'require': 'genark.js',
+      'pattern' : '**/*.ark'
     }
   ],
-  "routes": [
-    "config.js",
-    "echo.js",
-    "status.js",
-    "resolver.js",
-    "rest-crud.js"
+  'routes': [
+    'config.js',
+    'echo.js',
+    'status.js',
+    'resolver.js',
+    'rest-crud.js'
   ],
-  "uniqueValueWith" :  {
-    "get": ["_content.json.name", "_content.json.subject"],
-    "join" : "/",
-    "default" : "n/a"
+  'uniqueValueWith' :  {
+    'get': ['_content.json.name', '_content.json.subject'],
+    'join' : '/',
+    'default' : 'n/a'
   },
   "documentFields": {
     "ark": {
@@ -94,7 +94,7 @@ module.exports = {
           "_collection._content.json.name",
           "_collection._content.json.subject"
         ],
-        "join" : "/"
+        'join' : '/'
       }
     },
     "description" : {

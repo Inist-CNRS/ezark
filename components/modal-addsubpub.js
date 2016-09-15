@@ -1,4 +1,4 @@
-/* global $,Vue */
+/* global $ */
 'use strict';
 var Vue = require('vue');
 var MQS = require('mongodb-querystring');
