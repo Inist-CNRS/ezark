@@ -13,8 +13,16 @@ RUN rm -rf ./node_modules && \
     npm install --production && \
     npm cache clean
 
-RUN mkdir -p /opt/ezmaster/config/
-RUN ln -s /app/config.local.json /opt/ezmaster/config/config.json
+# ezmasterization of ezark
+# see https://github.com/Inist-CNRS/ezmaster
+RUN echo '{ \
+  "httpPort": 3000, \
+  "configPath": "/app/config.local.json", \
+  "dataPath":   "" \
+}' > /etc/ezmaster.json
+
+# load config sample
+RUN cp -f /app/config.sample.json /app/config.local.json
 
 # run the application
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
