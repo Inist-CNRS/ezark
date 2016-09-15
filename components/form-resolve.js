@@ -1,11 +1,12 @@
+/* eslint no-console: "off" */
 'use strict';
 var Vue = require('vue');
 
 module.exports = new Vue({
   el: '#form-resolve',
   data: {
-    name: "",
-    naan: "?"
+    name: '',
+    naan: '?'
   },
   ready: function() {
     var self = this;
@@ -20,4 +21,4 @@ module.exports = new Vue({
       return false;
     }
   }
-})
+});

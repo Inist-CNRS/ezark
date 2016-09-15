@@ -1,11 +1,10 @@
+/* eslint no-unused-vars: ["error", { "varsIgnorePattern": "mqs|heartbeats|async"}] */
 'use strict';
 var mqs = require('mongodb-querystring');
 var heartbeats = require("heartbeats");
 var async = require("async");
 var Vue = require("vue");
 
-
-var Vue = require('vue');
 Vue.config.delimiters = ['[[', ']]'];
 
 Vue.use(require('vue-validator'));

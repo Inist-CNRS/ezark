@@ -1,4 +1,4 @@
-/* global $,Vue */
+/* global $ */
 'use strict';
 var async = require('async');
 var Vue = require('vue');
