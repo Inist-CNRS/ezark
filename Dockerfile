@@ -5,16 +5,21 @@ FROM node:argon
 RUN mkdir -p /app
 WORKDIR /app
 
-# Bundle app source
+# npm dependencies before addinq source code
+COPY ./package.json /app
+RUN npm install --production -q && npm cache clean
 COPY . /app
 
-# Install app dependencies
-RUN rm -rf ./node_modules && \
-    npm install --production && \
-    npm cache clean
+# ezmasterization of ezark
+# see https://github.com/Inist-CNRS/ezmaster
+RUN echo '{ \
+  "httpPort": 3000, \
+  "configPath": "/app/config.local.json", \
+  "dataPath":   "" \
+}' > /etc/ezmaster.json
 
-RUN mkdir -p /opt/ezmaster/config/
-RUN ln -s /app/config.local.json /opt/ezmaster/config/config.json
+# load config sample
+RUN cp -f /app/config.sample.json /app/config.local.json
 
 # run the application
 ENTRYPOINT ["/app/docker-entrypoint.sh"]
