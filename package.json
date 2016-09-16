@@ -10,7 +10,8 @@
     "build": "browserify -d components/main.js -o public/libs.js && echo $?",
     "start": "./ezark",
     "prestart": "npm run build",
-    "preversion": "npm run build && git add public/libs.js"
+    "preversion": "npm run build && git add public/libs.js",
+    "postversion": "git push && git push --tags"
   },
   "keywords": [],
   "contributors": [
