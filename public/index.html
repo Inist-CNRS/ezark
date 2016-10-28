@@ -5,25 +5,13 @@
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 
-		<link href="/favicon.ico" rel="icon">
-
-		<!-- Fonts -->
-		<!-- <link href='http://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'> -->
-
-		<!-- Bootstrap core CSS -->
-		<link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
-		<!-- Custom styles for this template -->
-		<link href="/assets/css/main.css" rel="stylesheet">
-
-		<!-- Material Design for Bootstrap -->
-		<!-- Include roboto.css to use the Roboto web font, material.css to include the theme and ripples.css to style the ripple effect -->
-		<link href="/libs/bootstrap-material-design/dist/css/roboto.min.css" rel="stylesheet">
-		<link href="/libs/bootstrap-material-design/dist/css/material.min.css" rel="stylesheet">
-		<link href="/libs/bootstrap-material-design/dist/css/ripples.min.css" rel="stylesheet">
+		<link rel="icon" href="/favicon.ico">
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/material.min.css">
+		<link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.min.css">
 
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -35,222 +23,44 @@
 	</head>
 
 	<body>
-
-
-
 		<div class="jumbotron">
 			<div class="container">
 				<h1>ARK registry</h1>
 				<p>
-				Cette interface permet pour un NAAN donné de générer, recenser et garantir l'unicité des "préfix" (sub publisher).
-				Elle offre également la possibilité de gérer des identifiants. Cependant chaque "sub publisher" peut générer ces propres identifiants en utilisant l'alphabet suivant <em>«0123456789bcdfghjklmnpqrstvwxz»</em>
+        Cette interface permet pour un NAAN donné de générer, recenser et garantir l'unicité des "préfix" (sub publisher).<br>
+        <strong>C'est un registre centralisé </strong>.
+        </p>
+        <p>
+				Elle offre également la possibilité de générer et résoudre des identifiants. Pour plus d'information vous pouvez consulter :
+        <ul>
+          <li><a href="http://lodex.inist.fr/ezark/">le guide d'utilisation d'ezark</a></li>
+          <li><a href="https://github.com/Inist-CNRS/ezark">Le code source de cette application</a></li>
+          <li><a href="https://github.com/Inist-CNRS/node-inist-ark">L'algorithme de génération des ARKs</a></li>
+        </ul>
 				</p>
 				<p>
 				<div class="row">
 					<div class="col-md-4">
-						<a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#modal-generate">New ARK &raquo;</a>
-					</div>
-					<div class="col-md-4 col-md-offset-4 text-right">
-						<a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="modal" data-target="#modal-addsubpub">New Sub Publisher&raquo;</a></p>
+            <div id="generate"> </div>
+          </div>
+					<div class="col-md-4 col-md-offset-4">
+            <div id="addsubpub"> </div>
 					</div>
 				</div>
 			</div>
 		</div>
-
 		<div class="container">
-			<div class="row" id="metrics">
-				<div class="col-xs-6 col-md-3">
-					<div class="panel status panel-info">
-						<div class="panel-heading">
-							<h1 class="panel-title text-center">
-                [[ naan ]]
-              </h1>
-						</div>
-						<div class="panel-body text-center">
-							<a href="http://www.cdlib.org/uc3/naan_registry.txt"><strong>NAAN</strong></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-6 col-md-3">
-					<div class="panel status panel-warning">
-						<div class="panel-heading">
-							<h1 class="panel-title text-center" id="count-range-handle">
-								[[ countRanges ]]</a>
-							</h1>
-						</div>
-						<div class="panel-body text-center">
-							<a href="/index/*?alt=tsv"><strong>Sub Publisher</strong></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-6 col-md-3">
-					<div class="panel status panel-success">
-						<div class="panel-heading">
-							<h1 class="panel-title text-center" id="count-identifier-handle">
-								[[ countIdentifiers ]]
-							</h1>
-						</div>
-						<div class="panel-body text-center">
-							<strong>Identifiers</strong>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-6 col-md-3">
-					<div class="panel status panel-info">
-						<div class="panel-heading">
-							<h1 class="panel-title text-center">
-								[[ countBundles ]]
-							</h1>
-						</div>
-						<div class="panel-body text-center">
-							<strong>Bundles</strong>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div id="form-resolve" class="row">
-				<form id="form-resolve"  v-on:submit.prevent="handleResolve">
-					<div class="col-sm-3">
-					</div>
-					<div class="form-group form-group-lg  col-sm-6">
-						<div class="input-group">
-							<div id="form-resolve-addon-ark" class="input-group-addon" style="font-size:2em; font-weight:bold;">ark:/[[ naan ]]/</div>
-							<input type="text" class="form-control" style="font-size:2em;" v-model="name"  v-on:keyup.enter="handleResolve" />
-						</div>
-					</div>
-				</form>
-			</div>
-
-			<div id="modal-generate" class="modal fade">
-				<validator name="validation1">
-				<form novalidate class="form-horizontal">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<h4 class="modal-title">Generate new ARK</h4>
-							</div>
-							<div class="modal-body">
-								<!-- see templates/select-range.html -->
-								<div class="form-group">
-									<label for="modal-generate-input-range" class="col-sm-4 control-label">Sub publisher</label>
-									<div class="col-sm-8" id="select-range-handle">
-										<select class="form-control" id="modal-generate-input-range" v-model="range"  v-validate:range="{ required: true }">
-											<option v-for="rg in ranges" v-bind:value="rg._id">
-											[[ rg.value ]]
-											</option>
-										</select>
-										<span class="help-block has-error" v-if="$validation1.range.required">Veuillez choisir un préfix</span>
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="modal-generate-input-size" class="col-sm-4 control-label">Number</label>
-									<div class="col-sm-8">
-										<input id="modal-generate-input-size" type="text" class="form-control" v-model="size"  v-validate:size="{ required: true, numeric : true }">
-										<span class="help-block" v-if="$validation1.size.required">Veuillez choisir le nombre d'identifiant à générer</span>
-										<span class="help-block" v-if="$validation1.size.numeric">Veuillez choisir un nombre</span>
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="modal-generate-input-token" class="col-sm-4 control-label">Secure Token</label>
-									<div class="col-sm-8">
-										<input id="modal-generate-input-token" type="text" class="form-control" v-model="token">
-									</div>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								<button type="button" class="btn btn-primary" v-on:click="handleGenerate"  v-if="$validation1.valid">
-									<span id="modal-generate-spinner" style="display:none" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> [[ label ]]
-								</button>
-							</div>
-						</div><!-- /.modal-content -->
-					</div><!-- /.modal-dialog -->
-				</form>
-				</validator>
-			</div><!-- /.modal -->
-
-
-
-			<div id="modal-addsubpub" class="modal fade">
-				<validator name="validation2">
-				<form novalidate class="form-horizontal" v-on:submit.prevent="handleAddsubpub">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-								<h4 class="modal-title">Generate new sub publisher</h4>
-							</div>
-							<div class="modal-body">
-								<div class="form-group">
-									<label for="modal-addsubpub-input-target" class="col-sm-4 control-label">URL</label>
-									<div class="col-sm-8">
-										<input id="modal-addsubpub-input-target" type="url" class="form-control" v-model="target" v-validate:target="{ required: true, url : true }">
-										<span class="help-block" v-if="$validation2.target.url" v-if="$validation2.target.required">Veuillez choisir l'URL de destination des ARK</span>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label for="modal-addsubpub-input-name" class="col-sm-4 control-label">Nom</label>
-									<div class="col-sm-8">
-										<input id="modal-addsubpub-input-name" type="text" class="form-control" v-model="name">
-										<p class="help-block">projet, application, service</p>
-
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="modal-addsubpub-input-subject" class="col-sm-4 control-label">Sujet</label>
-									<div class="col-sm-8">
-										<input id="modal-addsubpub-input-subject" type="text" class="form-control" v-model="subject">
-										<p class="help-block">dépot, étude, jeu de données</p>
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="modal-addsubpub-input-description" class="col-sm-4 control-label">Description</label>
-									<div class="col-sm-8">
-										<input id="modal-addsubpub-input-description" type="text" class="form-control" v-model="description">
-									</div>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								<button type="submit" class="btn btn-primary" v-on:click="handleAddsubpub" v-if="$validation2.valid">
-									<span id="modal-addsubpub-spinner" style="display:none" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> [[ label ]]
-								</button>
-							</div>
-						</div><!-- /.modal-content -->
-					</div><!-- /.modal-dialog -->
-				</form>
-				</validator>
-			</div><!-- /.modal -->
-
-
-
-
+			<div id="metrics"> </div>
+			<div id="resolve"> </div>
 		</div>
-
-
-
-
-
-		<!-- Bootstrap core JavaScript
-	  ================================================== -->
-	  <!-- Placed at the end of the document so the pages load faster -->
-	  <script src="/libs/jquery/dist/jquery.min.js"></script>
-	  <script src="/libs/jquery-migrate/dist/jquery-migrate.min.js"></script>
-	  <script src="/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-	  <script src="/libs/bootstrap-material-design/dist/js/ripples.min.js"></script>
-	  <script src="/libs/bootstrap-material-design/dist/js/material.min.js"></script>
+	  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+	  <script src="bower_components/jquery-migrate/dist/jquery-migrate.min.js"></script>
+	  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	  <script src="bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
+	  <script src="bower_components/bootstrap-material-design/dist/js/ripples.min.js"></script>
 	  <script>
-$(document).ready(function() {
-	// This command is used to initialize some elements and make them work properly
-	$.material.init();
-});
+      $.material.init();
 	  </script>
-    <script src="/libs.js"></script>
+    <script src="dist/build.js"></script>
 	</body>
 </html>
-
-
-

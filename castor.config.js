@@ -41,7 +41,6 @@ module.exports = {
     'config.js',
     'echo.js',
     'status.js',
-    'resolver.js',
     'rest-crud.js'
   ],
   'uniqueValueWith' :  {

@@ -6,7 +6,7 @@ var path = require('path')
   , loop = require('serial-loop')
   , URL = require('url')
   , MQS = require('mongodb-querystring')
-  , ARK = require('../helpers/ark.js')
+  , ARK = require('inist-ark')
   ;
 
 
@@ -19,33 +19,31 @@ module.exports = function(options, config) {
       , delay       = cf.delay || 100
       , loc         = URL.parse(input.location, true)
       , params      = MQS.parse(loc.search.slice(1))
-      , bundle      = params.bundle
-      , size        = Number(params.size)
-      , subpub      = params.subpub || ''
-      , naan        = params.naan || ''
-      , ark         = new ARK(naan, subpub)
+      , bundle      = params.bundle || Date.now()
+      , arkopt      = {
+          naan         : params.naan || '',
+          subpublisher : params.subpub.toLocaleUpperCase()  || ''
+        }
+      , size        = Number(params.size || 1)
       ;
-    debug('size', size);
-    debug('subpub', subpub);
-    debug('naan', naan);
-    debug('params', params);
     if (Number.isNaN(size) || size < 1) {
       return submit(new Error('Size is not valid'), null);
     }
-    if (subpub === '') {
+    if (arkopt.subpublisher === '') {
       return submit(new Error('Sub publisher is not valid'), null);
     }
-    if (naan === '') {
+    if (arkopt.naan === '') {
       return submit(new Error('NAAN is not valid'), null);
     }
+    var idt = new ARK(arkopt)
     loop(size, function each (next, i) {
       var doc = clone(input, false);
-      var idt = ark.generate();
-      doc._wid = idt.slice(11);
-      doc._content = {
+      var ark = idt.generate();
+      doc.wid = ark.slice(11);
+      doc.content = {
         json : {
           bundle : bundle,
-          ark: idt
+          ark: ark
         }
       };
       var qe = submit(doc);
