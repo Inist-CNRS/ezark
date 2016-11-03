@@ -7,6 +7,7 @@ WORKDIR /app
 
 # npm dependencies before addinq source code
 COPY ./package.json /app
+COPY ./ezark  /app
 RUN npm install --production -q && npm cache clean
 COPY . /app
 

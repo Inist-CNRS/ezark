@@ -25,6 +25,7 @@
   "dependencies": {
     "async": "^2.0.1",
     "castor-core": "^8.2.0",
+    "clone": "^2.0.0",
     "debug": "^2.2.0",
     "inist-ark": "^2.0.0",
     "mongodb-querystring": "^1.0.3",
