@@ -1,0 +1,340 @@
+[
+    {
+        "cover": "collection",
+        "label": "uri",
+        "name": "uri",
+        "display_on_list": true,
+        "transformers": [
+            {
+                "operation": "COLUMN",
+                "args": [
+                    {
+                        "name": "column",
+                        "type": "column",
+                        "value": "Sub publisher prefix"
+                    }
+                ]
+            }
+        ],
+        "position": 0
+    },
+    {
+        "cover": "dataset",
+        "label": "Titre",
+        "display_in_list": "",
+        "display_in_resource": "",
+        "searchable": true,
+        "transformers": [
+            {
+                "operation": "VALUE",
+                "args": [
+                    {
+                        "name": "value",
+                        "type": "string",
+                        "value": "Registre officiel des préfixes ARK pour l'Inist-CNRS"
+                    }
+                ]
+            }
+        ],
+        "classes": [],
+        "position": 1,
+        "name": "aG5R",
+        "display_in_home": true,
+        "count": 0,
+        "format": {
+            "args": {
+                "level": 1
+            },
+            "name": "title"
+        }
+    },
+    {
+        "cover": "dataset",
+        "label": "Description",
+        "display_in_list": "",
+        "display_in_resource": "",
+        "searchable": true,
+        "transformers": [
+            {
+                "operation": "VALUE",
+                "args": [
+                    {
+                        "name": "value",
+                        "type": "string",
+                        "value": "Cette interface permet pour un NAAN donné de générer, recenser et garantir l'unicité des \"préfix\" (sub publisher). C'est un registre centralisé."
+                    }
+                ]
+            }
+        ],
+        "classes": [],
+        "position": 2,
+        "name": "RYI2",
+        "display_in_home": true,
+        "count": 0,
+        "format": {
+            "args": {},
+            "name": "markdown"
+        }
+    },
+    {
+        "cover": "dataset",
+        "label": "NAAN",
+        "display_in_list": "",
+        "display_in_resource": "",
+        "searchable": true,
+        "transformers": [
+            {
+                "operation": "VALUE",
+                "args": [
+                    {
+                        "name": "value",
+                        "type": "string",
+                        "value": "67375"
+                    }
+                ]
+            }
+        ],
+        "classes": [],
+        "position": 3,
+        "name": "JAiI",
+        "display_in_home": true,
+        "count": 0,
+        "format": {
+            "args": {
+                "size": 2,
+                "colors": "#8B8B8B #5B5B5B #818181"
+            },
+            "name": "emphasedNumber"
+        }
+    },
+    {
+        "cover": "collection",
+        "label": "Nom",
+        "display_in_list": true,
+        "display_in_resource": true,
+        "searchable": true,
+        "transformers": [
+            {
+                "operation": "COLUMN",
+                "args": [
+                    {
+                        "name": "column",
+                        "type": "column",
+                        "value": "Title"
+                    }
+                ]
+            },
+            {
+                "args": [
+                    {
+                        "name": "separator",
+                        "type": "string",
+                        "value": "/"
+                    }
+                ],
+                "operation": "SPLIT"
+            },
+            {
+                "args": [
+                    {
+                        "name": "gap",
+                        "type": "number",
+                        "value": "1"
+                    }
+                ],
+                "operation": "TRUNCATE"
+            },
+            {
+                "operation": "JOIN",
+                "args": [
+                    {
+                        "name": "separator",
+                        "type": "string",
+                        "value": " "
+                    }
+                ]
+            }
+        ],
+        "classes": [],
+        "position": 4,
+        "overview": 1,
+        "name": "INo2",
+        "count": 74
+    },
+    {
+        "cover": "collection",
+        "label": "Sujet",
+        "display_in_list": true,
+        "display_in_resource": true,
+        "searchable": true,
+        "transformers": [
+            {
+                "operation": "COLUMN",
+                "args": [
+                    {
+                        "name": "column",
+                        "type": "column",
+                        "value": "Title"
+                    }
+                ]
+            },
+            {
+                "args": [
+                    {
+                        "name": "separator",
+                        "type": "string",
+                        "value": "/"
+                    }
+                ],
+                "operation": "SPLIT"
+            },
+            {
+                "args": [
+                    {
+                        "name": "gap",
+                        "type": "number",
+                        "value": "1"
+                    }
+                ],
+                "operation": "SHIFT"
+            },
+            {
+                "operation": "JOIN",
+                "args": [
+                    {
+                        "name": "separator",
+                        "type": "string",
+                        "value": " "
+                    }
+                ]
+            }
+        ],
+        "classes": [],
+        "position": 5,
+        "name": "FfkY",
+        "count": 74,
+        "overview": 2
+    },
+    {
+        "cover": "collection",
+        "label": "Commentaire",
+        "display_in_list": "",
+        "display_in_resource": true,
+        "searchable": true,
+        "transformers": [
+            {
+                "operation": "COLUMN",
+                "args": [
+                    {
+                        "name": "column",
+                        "type": "column",
+                        "value": "Description"
+                    }
+                ]
+            }
+        ],
+        "classes": [],
+        "position": 6,
+        "name": "A5AT",
+        "count": 74
+    },
+    {
+        "cover": "collection",
+        "label": "Application URL",
+        "display_in_list": "",
+        "display_in_resource": true,
+        "searchable": true,
+        "transformers": [
+            {
+                "operation": "COLUMN",
+                "args": [
+                    {
+                        "name": "column",
+                        "type": "column",
+                        "value": "Application URL"
+                    }
+                ]
+            }
+        ],
+        "classes": [],
+        "position": 7,
+        "name": "M4qa",
+        "count": 74,
+        "format": {
+            "args": {
+                "type": "value",
+                "value": ""
+            },
+            "name": "link"
+        }
+    },
+    {
+        "label": "Sub Publisher",
+        "format": {
+            "args": {
+                "maxSize": "5",
+                "spaceWidth": "30%",
+                "orderBy": "value/asc"
+            },
+            "name": "resourcesGrid"
+        },
+        "cover": "dataset",
+        "transformers": [
+            {
+                "operation": "VALUE",
+                "args": [
+                    {
+                        "name": "value",
+                        "type": "string",
+                        "value": "/"
+                    }
+                ]
+            }
+        ],
+        "position": 8,
+        "name": "kPzT",
+        "count": 0,
+        "display_in_home": true
+    },
+    {
+        "label": "qsdqsd",
+        "scheme": "http://purl.org/vvo/ns#dhCode",
+        "name": "a2t2",
+        "cover": "document",
+        "contribution": true,
+        "position": 9,
+        "transformers": [
+            {
+                "operation": "COLUMN",
+                "args": [
+                    {
+                        "name": "column",
+                        "type": "column",
+                        "value": "qsdqsd"
+                    }
+                ]
+            }
+        ],
+        "contributors": [
+            null
+        ]
+    },
+    {
+        "label": "sdsdf",
+        "cover": "dataset",
+        "transformers": [
+            {
+                "operation": "VALUE",
+                "args": [
+                    {
+                        "name": "value",
+                        "type": "string",
+                        "value": "sdsdf"
+                    }
+                ]
+            }
+        ],
+        "position": 10,
+        "name": "BSP0"
+    }
+]
