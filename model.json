@@ -2,7 +2,6 @@
     {
         "cover": "collection",
         "label": "uri",
-        "name": "uri",
         "display_on_list": true,
         "transformers": [
             {
@@ -16,7 +15,8 @@
                 ]
             }
         ],
-        "position": 0
+        "position": 0,
+        "name": "uri"
     },
     {
         "cover": "dataset",
@@ -38,7 +38,6 @@
         ],
         "classes": [],
         "position": 1,
-        "name": "aG5R",
         "display_in_home": true,
         "count": 0,
         "format": {
@@ -46,7 +45,8 @@
                 "level": 1
             },
             "name": "title"
-        }
+        },
+        "name": "aG5R"
     },
     {
         "cover": "dataset",
@@ -68,13 +68,13 @@
         ],
         "classes": [],
         "position": 2,
-        "name": "RYI2",
         "display_in_home": true,
         "count": 0,
         "format": {
             "args": {},
             "name": "markdown"
-        }
+        },
+        "name": "RYI2"
     },
     {
         "cover": "dataset",
@@ -96,7 +96,6 @@
         ],
         "classes": [],
         "position": 3,
-        "name": "JAiI",
         "display_in_home": true,
         "count": 0,
         "format": {
@@ -105,7 +104,9 @@
                 "colors": "#8B8B8B #5B5B5B #818181"
             },
             "name": "emphasedNumber"
-        }
+        },
+        "name": "JAiI",
+        "width": "50"
     },
     {
         "cover": "collection",
@@ -158,8 +159,8 @@
         "classes": [],
         "position": 4,
         "overview": 1,
-        "name": "INo2",
-        "count": 74
+        "count": 74,
+        "name": "INo2"
     },
     {
         "cover": "collection",
@@ -211,9 +212,9 @@
         ],
         "classes": [],
         "position": 5,
-        "name": "FfkY",
         "count": 74,
-        "overview": 2
+        "overview": 2,
+        "name": "FfkY"
     },
     {
         "cover": "collection",
@@ -235,8 +236,8 @@
         ],
         "classes": [],
         "position": 6,
-        "name": "A5AT",
-        "count": 74
+        "count": 74,
+        "name": "A5AT"
     },
     {
         "cover": "collection",
@@ -258,7 +259,6 @@
         ],
         "classes": [],
         "position": 7,
-        "name": "M4qa",
         "count": 74,
         "format": {
             "args": {
@@ -266,15 +266,48 @@
                 "value": ""
             },
             "name": "link"
-        }
+        },
+        "name": "M4qa"
     },
     {
-        "label": "Sub Publisher",
+        "label": "Nombre de prefixes",
         "format": {
             "args": {
-                "maxSize": "5",
+                "size": 4,
+                "colors": "#818181 #8B8B8B #5B5B5B"
+            },
+            "name": "emphasedNumber"
+        },
+        "cover": "dataset",
+        "transformers": [
+            {
+                "operation": "VALUE",
+                "args": [
+                    {
+                        "name": "value",
+                        "type": "string",
+                        "value": "/api/run/count-all/"
+                    }
+                ]
+            }
+        ],
+        "position": 8,
+        "name": "AvQ8",
+        "width": "50",
+        "count": 0,
+        "display_in_home": true
+    },
+    {
+        "label": "Liste des préfixes déclarés",
+        "format": {
+            "args": {
                 "spaceWidth": "30%",
-                "orderBy": "value/asc"
+                "maxSize": "5",
+                "orderBy": "value/asc",
+                "params": {
+                    "maxSize": "18",
+                    "orderBy": "value/asc"
+                }
             },
             "name": "resourcesGrid"
         },
@@ -291,50 +324,9 @@
                 ]
             }
         ],
-        "position": 8,
-        "name": "kPzT",
-        "count": 0,
-        "display_in_home": true
-    },
-    {
-        "label": "qsdqsd",
-        "scheme": "http://purl.org/vvo/ns#dhCode",
-        "name": "a2t2",
-        "cover": "document",
-        "contribution": true,
         "position": 9,
-        "transformers": [
-            {
-                "operation": "COLUMN",
-                "args": [
-                    {
-                        "name": "column",
-                        "type": "column",
-                        "value": "qsdqsd"
-                    }
-                ]
-            }
-        ],
-        "contributors": [
-            null
-        ]
-    },
-    {
-        "label": "sdsdf",
-        "cover": "dataset",
-        "transformers": [
-            {
-                "operation": "VALUE",
-                "args": [
-                    {
-                        "name": "value",
-                        "type": "string",
-                        "value": "sdsdf"
-                    }
-                ]
-            }
-        ],
-        "position": 10,
-        "name": "BSP0"
+        "count": 0,
+        "display_in_home": true,
+        "name": "kPzT"
     }
 ]
